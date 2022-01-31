@@ -30,7 +30,7 @@ namespace Assignment4._1
                 else
                     return false;
             else if (Year < 0)
-                if (Year - 1 % 4 == 0) // if BC subtract 1 then divide by 4 to check
+                if ((Year + 1) % 4 == 0) // if BC subtract 1 then divide by 4 to check
                     return true;
             return false;
         }
