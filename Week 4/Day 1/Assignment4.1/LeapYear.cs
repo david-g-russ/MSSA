@@ -12,14 +12,26 @@ namespace Assignment4._1
 
         public bool LeapTruth(int year)
         {
-            if (year % 4 == 0)
-                return true;
+            if (year > 0) // check if AD or BC
+                if (year % 4 == 0) // if AD divide by 4 to check
+                    return true;
+                else
+                    return false;
+            else if (year < 0)
+                if (year - 1 % 4 == 0) // if BC subtract 1 then divide by 4 to check
+                    return true;
             return false;
         }
         public bool LeapTruth()
         {
-            if (Year % 4 == 0)
-                return true;
+            if (Year > 0) // check if AD or BC
+                if (Year % 4 == 0) // if AD divide by 4 to check
+                    return true;
+                else
+                    return false;
+            else if (Year < 0)
+                if (Year - 1 % 4 == 0) // if BC subtract 1 then divide by 4 to check
+                    return true;
             return false;
         }
 
