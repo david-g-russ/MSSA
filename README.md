@@ -4,10 +4,10 @@ Projects completed while attending Microsoft Software &amp; Systems Academy
 WEEK 1:
 
 	Assignment 1.1 - 
-    		1. Create a simple console application and store your name, age (should take decimal), address in a
-		string variable and print them back on console.
-   		2. Create a simple console application and declare basic datatypes like int, float, decimal, double
-		and print their min and	max values.
+    	1. Create a simple console application and store your name, age (should take decimal), 
+	address in a string variable and print them back on console.
+   		2. Create a simple console application and declare basic datatypes like int, 
+		float, decimal, double and print their min and	max values.
 	Assignment 1.2 -
 		1. Write a simple application to perform calculation functions. Call them appropriately when user selects the proper menu.
 		2. Write a C# Sharp program to accept two integers and check whether they are equal or not.
