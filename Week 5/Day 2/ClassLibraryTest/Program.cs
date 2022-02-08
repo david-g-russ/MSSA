@@ -20,11 +20,11 @@ namespace ClassLibraryTest
 
             List<Student> studentList = new List<Student>();
             studentList.Add(new Student() { Name = "Kelly", Grades = 80, Address = "123"});
-            studentList.Add(new Student() { Name = "Andrew", Grades = 60, Address = "123" });
-            studentList.Add(new Student() { Name = "Will", Grades = 85, Address = "123" });
-            studentList.Add(new Student() { Name = "Chris", Grades = 90, Address = "123" });
+            studentList.Add(new Student() { Name = "Andrew", Grades = 60, Address = "245" });
+            studentList.Add(new Student() { Name = "Will", Grades = 85, Address = "7567" });
+            studentList.Add(new Student() { Name = "Chris", Grades = 90, Address = "13423" });
 
-            studentList.Sort();
+            studentList.Sort(new StudentComparer());
             foreach (var s in studentList)
             {
                 Console.WriteLine($"{s.Name}, {s.Address}, {s.Grades}");
