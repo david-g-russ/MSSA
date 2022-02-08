@@ -31,4 +31,12 @@ namespace ClassLibraryTest
             return (y.Grades.CompareTo(x.Grades));
         }
     }
+
+    class AddressComparer : IComparer<Student>
+    {
+        public int Compare(Student x, Student y)
+        {
+            return (x.Address.CompareTo(y.Address));
+        }
+    }
 }

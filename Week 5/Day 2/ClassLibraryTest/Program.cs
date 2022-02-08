@@ -24,7 +24,7 @@ namespace ClassLibraryTest
             studentList.Add(new Student() { Name = "Will", Grades = 85, Address = "7567" });
             studentList.Add(new Student() { Name = "Chris", Grades = 90, Address = "13423" });
 
-            studentList.Sort(new StudentComparer());
+            studentList.Sort(new AddressComparer());
             foreach (var s in studentList)
             {
                 Console.WriteLine($"{s.Name}, {s.Address}, {s.Grades}");
