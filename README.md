@@ -6,8 +6,8 @@ WEEK 1:
 	Assignment 1.1 - 
     	1. Create a simple console application and store your name, age (should take decimal), 
 	address in a string variable and print them back on console.
-   		2. Create a simple console application and declare basic datatypes like int, float, decimal, double
-		and print their min and	max values.
+   		2. Create a simple console application and declare basic datatypes like int, float, decimal,
+		double and print their min and	max values.
 	Assignment 1.2 -
 		1. Write a simple application to perform calculation functions. Call them appropriately when user
 		selects the proper menu.
@@ -18,8 +18,8 @@ WEEK 1:
 		functions for each shape .
 		to take dimensions of figure and display the area. You may create menus.
 		2. Write a program in C# to read n number of values in an array and display it in reverse order.
-		3. Write a program to sort an integer array in ascending and descending order. Array can be created
-		with hard coded values.
+		3. Write a program to sort an integer array in ascending and descending order. Array can be
+		created with hard coded values.
 	Assignment 1.3.1 -
 		1. Write a simple console application to generate mathematical errors and handle them by exception
 		handling.
