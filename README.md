@@ -25,9 +25,9 @@ WEEK 1:
 		handling.
 		2. Use debugging tools in Visual studio.
 	Assignment 1.4 -
-		1. Create a structure named “Point” and 2 data members: X and Y coordinate. Declare 2 points: P1 and
-		P2. Determine if P2 is to the right or left of P1 or on same axis , by comparing the x xoordinates.
-		(if p1.x is more than p2.x , it is to the right)
+		1. Create a structure named “Point” and 2 data members: X and Y coordinate. Declare 2 points: P1
+		and P2. Determine if P2 is to the right or left of P1 or on same axis , by comparing the x
+		coordinates. (if p1.x is more than p2.x , it is to the right)
 		2. Write a class: “Student” with private data members: StudentId ( int), StudentFname (stirng),
 		StudentLname (string ), StudentGrade ( char ) and public properties for each data member. 
 		Instantiate the class and assign data to properties.call get and set properties.
