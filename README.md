@@ -76,20 +76,21 @@ WEEK 4:
 		should be enum.
 	Assignment 4.4 -
 		1. Events, delegates:
-		Create a windows form application to display bank account details. Create an event for low balance
-		and as soon as balance goes lower than 200, notify by raising the low balance event. Use delegates.
+		Create a windows form application to display bank account details. Create an event for low 
+		balance and as soon as balance goes lower than 200, notify by raising the low balance event.
+		Use delegates.
 		2. Organizing data into collections:
-		Create an abstract base class to represent “Beverage” and inherit “Coffee” class from it. Create a
-		generic list ( you may use Dictionary/Sortedlist) of coffees. Design windows form application to
-		display the list of coffees in grid and perform	add/ delete.
+		Create an abstract base class to represent “Beverage” and inherit “Coffee” class from it. Create
+		a generic list ( you may use Dictionary/Sortedlist) of coffees. Design windows form application
+		to display the list of coffees in grid and perform add/ delete.
 		
 WEEK 5:
 
 	Assignment 5.1 -
-		1. Create employee class and use type safe collections like stack, dictionary etc. to store employee
-		records and to use basic methods like add, delete on these collections.
+		1. Create employee class and use type safe collections like stack, dictionary etc. to store
+		employee records and to use basic methods like add, delete on these collections.
 		2. Create an interface for ICalculator for methods like add, subtract, divide , multiply and
 		implement them in a class.etc.
 	Assignment 5.3 -
-		1. Create any user defined class of your choice like Student, Customer etc. Add 3 properties in it (of
-		your choice). Serialize and deserialize the object of this class by Binary, XML, JSON format.
+		1. Create any user defined class of your choice like Student, Customer etc. Add 3 properties in it
+		(of your choice). Serialize and deserialize the object of this class by Binary, XML, JSON format.
