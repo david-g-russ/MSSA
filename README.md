@@ -29,8 +29,8 @@ WEEK 1:
 		P2. Determine if P2 is to the right or left of P1 or on same axis , by comparing the x xoordinates.
 		(if p1.x is more than p2.x , it is to the right)
 		2. Write a class: “Student” with private data members: StudentId ( int), StudentFname (stirng),
-		StudentLname (string ), StudentGrade ( char ) and public properties for each data member. Instantiate
-		the class and assign data to properties.call get and set properties.
+		StudentLname (string ), StudentGrade ( char ) and public properties for each data member. 
+		Instantiate the class and assign data to properties.call get and set properties.
 
 WEEK 2:
 
