@@ -27,7 +27,12 @@ namespace WPFTest
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
+            BooksDBEntities entities = new BooksDBEntities();
             MessageBox.Show($"Welcome {txtName.Text}");
+            grdBook.ItemsSource = entities.Books.ToList();
+            List<Coffee> coffees = new List<Coffee>() { new Coffee() { Name = "Latte", Bean = "Dark Roast", Country = "Mexico"},
+                {new Coffee() {Name = "Espresso", Bean = "Light Roast", Country = "U.S." } } };
+            lstCoffees.ItemsSource = coffees;
         }
     }
 }

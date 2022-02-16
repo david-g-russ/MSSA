@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:WPFTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
+    <Window.Resources>
+        <SolidColorBrush x:Key="MyB" Color="Crimson"/>
+        <TextBlock x:Key="mytextblock" Background="Azure"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
@@ -22,9 +26,18 @@
             <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="10,10,10,10"  Grid.Row="1" Grid.Column="1" Text="First WPF Test" FontSize="40" Grid.ColumnSpan="3" FontFamily="Reem Kufi"/>
-        <TextBlock Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="Full Name:" FontSize="30"/>
+        <TextBlock Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="Full Name:" FontSize="30" Foreground="{StaticResource MyB}"/>
         <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="2" x:Name="txtName" Width="240"/>
-        <Button x:Name="btnShow" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Height="75" Width="150" Content="Run me" Click="btnShow_Click"/>
+        <Button x:Name="btnShow" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Height="75" Width="150" Content="Run me" Click="btnShow_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="1.5,1.5">
+                    <GradientStop Color="AliceBlue" Offset="0"/>
+                    <GradientStop Color="Aqua" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <DataGrid x:Name="grdBook" Grid.Row="3" Grid.Column="3" Background="Coral"/>
+        <ListBox x:Name="lstCoffees" DisplayMemberPath="Name" Grid.Row="2" Grid.Column="3" Width="100"/>
 
     </Grid>
 </Window>
