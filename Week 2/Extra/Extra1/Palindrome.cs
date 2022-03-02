@@ -9,7 +9,7 @@ namespace Extra1
     internal struct Palindrome
     {
         public int Num1 { get; set; } // public property
-        public bool Palin() // function to check if palindrome
+        /*public bool Palin() // function to check if palindrome
         {
             string numString = Num1.ToString(); // convert int to string
             for (int i = 0;i<numString.Length;i++) // go through string from 0 to size of string
@@ -25,6 +25,22 @@ namespace Extra1
             }
             return true; // if for loop completes, it is a palindrome
 
+        }*/
+
+        public bool Palin()
+        {
+            string nums = Num1.ToString();
+            for (int i = 0; i < nums.Length / 2; i++)
+            {
+                for (int j = nums.Length - 1; j >= nums.Length / 2 - 1; j--)
+                {
+                    if (nums[i] != nums[j])
+                        return false;
+                    else
+                        continue;
+                }
+            }
+            return true;
         }
         public Palindrome(int num1) // constructor that takes 1 int
         {
