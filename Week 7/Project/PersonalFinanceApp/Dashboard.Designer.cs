@@ -35,7 +35,7 @@
             this.tbcMain = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tbDash = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.pnlDGraph = new MetroSet_UI.Controls.MetroSetPanel();
-            this.chtDbalance = new LiveCharts.WinForms.CartesianChart();
+            this.chtDTrans = new LiveCharts.WinForms.CartesianChart();
             this.tbcDashView = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tbDPastTrans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.grdDPastTrans = new System.Windows.Forms.DataGridView();
@@ -43,11 +43,10 @@
             this.grdDFutTrans = new System.Windows.Forms.DataGridView();
             this.pnlDCharts = new MetroSet_UI.Controls.MetroSetPanel();
             this.metroSetDivider1 = new MetroSet_UI.Controls.MetroSetDivider();
-            this.gagDbudget = new LiveCharts.WinForms.AngularGauge();
-            this.pieDbudget = new LiveCharts.WinForms.PieChart();
+            this.pieDCategory = new LiveCharts.WinForms.PieChart();
             this.tbTrans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.pnlTGraph = new MetroSet_UI.Controls.MetroSetPanel();
-            this.chtTbalance = new LiveCharts.WinForms.CartesianChart();
+            this.chtTTrans = new LiveCharts.WinForms.CartesianChart();
             this.tbcTransView = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tbTPastTrans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.grdTPastTrans = new System.Windows.Forms.DataGridView();
@@ -96,7 +95,7 @@
             this.btnTRemove = new MetroSet_UI.Controls.MetroSetButton();
             this.tbLoans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.pnlLGraph = new MetroSet_UI.Controls.MetroSetPanel();
-            this.chtLbalance = new LiveCharts.WinForms.CartesianChart();
+            this.chtLLoans = new LiveCharts.WinForms.CartesianChart();
             this.tbcLoansView = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tbLloans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.grdLloans = new System.Windows.Forms.DataGridView();
@@ -134,7 +133,7 @@
             this.tbCalendar = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.pnlCalendar = new MetroSet_UI.Controls.MetroSetPanel();
             this.pnlCGraph = new MetroSet_UI.Controls.MetroSetPanel();
-            this.chtCbalance = new LiveCharts.WinForms.CartesianChart();
+            this.chtCTrans = new LiveCharts.WinForms.CartesianChart();
             this.tbBudget = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.tbcBudgetView = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tbCcategories = new MetroSet_UI.Child.MetroSetSetTabPage();
@@ -153,9 +152,9 @@
             this.lblBRcategoryName = new MetroSet_UI.Controls.MetroSetLabel();
             this.btnBRemove = new MetroSet_UI.Controls.MetroSetButton();
             this.pnlBcharts = new MetroSet_UI.Controls.MetroSetPanel();
-            this.pieChart1 = new LiveCharts.WinForms.PieChart();
+            this.pieBCategory = new LiveCharts.WinForms.PieChart();
             this.metroSetDivider2 = new MetroSet_UI.Controls.MetroSetDivider();
-            this.chtBbalance = new LiveCharts.WinForms.CartesianChart();
+            this.chtBCategory = new LiveCharts.WinForms.CartesianChart();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.txtTSusername = new System.Windows.Forms.ToolStripTextBox();
@@ -166,6 +165,7 @@
             this.lblSubHeading = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chtDLoans = new LiveCharts.WinForms.CartesianChart();
             this.tbcMain.SuspendLayout();
             this.tbDash.SuspendLayout();
             this.pnlDGraph.SuspendLayout();
@@ -257,14 +257,14 @@
             this.tbcMain.Controls.Add(this.tbLoans);
             this.tbcMain.Controls.Add(this.tbCalendar);
             this.tbcMain.Controls.Add(this.tbBudget);
-            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbcMain.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tbcMain.ImageList = this.imageList1;
             this.tbcMain.IsDerivedStyle = true;
             this.tbcMain.ItemSize = new System.Drawing.Size(100, 38);
             this.tbcMain.Location = new System.Drawing.Point(12, 186);
             this.tbcMain.Name = "tbcMain";
-            this.tbcMain.SelectedIndex = 1;
+            this.tbcMain.SelectedIndex = 0;
             this.tbcMain.SelectedTextColor = System.Drawing.Color.White;
             this.tbcMain.Size = new System.Drawing.Size(2536, 1242);
             this.tbcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -303,7 +303,7 @@
             this.pnlDGraph.BackgroundColor = System.Drawing.Color.White;
             this.pnlDGraph.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlDGraph.BorderThickness = 1;
-            this.pnlDGraph.Controls.Add(this.chtDbalance);
+            this.pnlDGraph.Controls.Add(this.chtDTrans);
             this.pnlDGraph.IsDerivedStyle = true;
             this.pnlDGraph.Location = new System.Drawing.Point(46, 52);
             this.pnlDGraph.Name = "pnlDGraph";
@@ -314,14 +314,13 @@
             this.pnlDGraph.ThemeAuthor = "Narwin";
             this.pnlDGraph.ThemeName = "MetroLite";
             // 
-            // chtDbalance
+            // chtDTrans
             // 
-            this.chtDbalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtDbalance.Location = new System.Drawing.Point(0, 0);
-            this.chtDbalance.Name = "chtDbalance";
-            this.chtDbalance.Size = new System.Drawing.Size(1065, 595);
-            this.chtDbalance.TabIndex = 2;
-            this.chtDbalance.Text = "cartesianChart1";
+            this.chtDTrans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtDTrans.Location = new System.Drawing.Point(0, 0);
+            this.chtDTrans.Name = "chtDTrans";
+            this.chtDTrans.Size = new System.Drawing.Size(1065, 595);
+            this.chtDTrans.TabIndex = 2;
             // 
             // tbcDashView
             // 
@@ -369,11 +368,16 @@
             // 
             // grdDPastTrans
             // 
+            this.grdDPastTrans.AllowUserToAddRows = false;
+            this.grdDPastTrans.AllowUserToDeleteRows = false;
+            this.grdDPastTrans.AllowUserToResizeColumns = false;
+            this.grdDPastTrans.AllowUserToResizeRows = false;
             this.grdDPastTrans.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdDPastTrans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdDPastTrans.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdDPastTrans.Location = new System.Drawing.Point(0, 0);
             this.grdDPastTrans.Name = "grdDPastTrans";
+            this.grdDPastTrans.ReadOnly = true;
             this.grdDPastTrans.RowHeadersWidth = 62;
             this.grdDPastTrans.RowTemplate.Height = 28;
             this.grdDPastTrans.Size = new System.Drawing.Size(1285, 1057);
@@ -415,9 +419,9 @@
             this.pnlDCharts.BackgroundColor = System.Drawing.Color.White;
             this.pnlDCharts.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlDCharts.BorderThickness = 1;
+            this.pnlDCharts.Controls.Add(this.chtDLoans);
             this.pnlDCharts.Controls.Add(this.metroSetDivider1);
-            this.pnlDCharts.Controls.Add(this.gagDbudget);
-            this.pnlDCharts.Controls.Add(this.pieDbudget);
+            this.pnlDCharts.Controls.Add(this.pieDCategory);
             this.pnlDCharts.IsDerivedStyle = true;
             this.pnlDCharts.Location = new System.Drawing.Point(46, 690);
             this.pnlDCharts.Name = "pnlDCharts";
@@ -431,7 +435,7 @@
             // metroSetDivider1
             // 
             this.metroSetDivider1.IsDerivedStyle = true;
-            this.metroSetDivider1.Location = new System.Drawing.Point(515, 31);
+            this.metroSetDivider1.Location = new System.Drawing.Point(529, 31);
             this.metroSetDivider1.Name = "metroSetDivider1";
             this.metroSetDivider1.Orientation = MetroSet_UI.Enums.DividerStyle.Vertical;
             this.metroSetDivider1.Size = new System.Drawing.Size(4, 415);
@@ -443,23 +447,13 @@
             this.metroSetDivider1.ThemeName = "MetroLite";
             this.metroSetDivider1.Thickness = 1;
             // 
-            // gagDbudget
+            // pieDCategory
             // 
-            this.gagDbudget.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gagDbudget.Location = new System.Drawing.Point(0, 0);
-            this.gagDbudget.Name = "gagDbudget";
-            this.gagDbudget.Size = new System.Drawing.Size(465, 465);
-            this.gagDbudget.TabIndex = 0;
-            this.gagDbudget.Text = "angularGauge1";
-            // 
-            // pieDbudget
-            // 
-            this.pieDbudget.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pieDbudget.Location = new System.Drawing.Point(582, 0);
-            this.pieDbudget.Name = "pieDbudget";
-            this.pieDbudget.Size = new System.Drawing.Size(483, 465);
-            this.pieDbudget.TabIndex = 1;
-            this.pieDbudget.Text = "pieChart1";
+            this.pieDCategory.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pieDCategory.Location = new System.Drawing.Point(582, 0);
+            this.pieDCategory.Name = "pieDCategory";
+            this.pieDCategory.Size = new System.Drawing.Size(483, 465);
+            this.pieDCategory.TabIndex = 1;
             // 
             // tbTrans
             // 
@@ -487,7 +481,7 @@
             this.pnlTGraph.BackgroundColor = System.Drawing.Color.White;
             this.pnlTGraph.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlTGraph.BorderThickness = 1;
-            this.pnlTGraph.Controls.Add(this.chtTbalance);
+            this.pnlTGraph.Controls.Add(this.chtTTrans);
             this.pnlTGraph.IsDerivedStyle = true;
             this.pnlTGraph.Location = new System.Drawing.Point(55, 591);
             this.pnlTGraph.Name = "pnlTGraph";
@@ -498,14 +492,13 @@
             this.pnlTGraph.ThemeAuthor = "Narwin";
             this.pnlTGraph.ThemeName = "MetroLite";
             // 
-            // chtTbalance
+            // chtTTrans
             // 
-            this.chtTbalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtTbalance.Location = new System.Drawing.Point(0, 0);
-            this.chtTbalance.Name = "chtTbalance";
-            this.chtTbalance.Size = new System.Drawing.Size(1105, 564);
-            this.chtTbalance.TabIndex = 0;
-            this.chtTbalance.Text = "cartesianChart2";
+            this.chtTTrans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtTTrans.Location = new System.Drawing.Point(0, 0);
+            this.chtTTrans.Name = "chtTTrans";
+            this.chtTTrans.Size = new System.Drawing.Size(1105, 564);
+            this.chtTTrans.TabIndex = 0;
             // 
             // tbcTransView
             // 
@@ -514,7 +507,7 @@
             this.tbcTransView.BackgroundColor = System.Drawing.Color.White;
             this.tbcTransView.Controls.Add(this.tbTPastTrans);
             this.tbcTransView.Controls.Add(this.tbTFutTrans);
-            this.tbcTransView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbcTransView.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbcTransView.IsDerivedStyle = true;
             this.tbcTransView.ItemSize = new System.Drawing.Size(100, 38);
             this.tbcTransView.Location = new System.Drawing.Point(1192, 52);
@@ -553,11 +546,16 @@
             // 
             // grdTPastTrans
             // 
+            this.grdTPastTrans.AllowUserToAddRows = false;
+            this.grdTPastTrans.AllowUserToDeleteRows = false;
+            this.grdTPastTrans.AllowUserToResizeColumns = false;
+            this.grdTPastTrans.AllowUserToResizeRows = false;
             this.grdTPastTrans.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdTPastTrans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdTPastTrans.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdTPastTrans.Location = new System.Drawing.Point(0, 0);
             this.grdTPastTrans.Name = "grdTPastTrans";
+            this.grdTPastTrans.ReadOnly = true;
             this.grdTPastTrans.RowHeadersWidth = 62;
             this.grdTPastTrans.RowTemplate.Height = 28;
             this.grdTPastTrans.Size = new System.Drawing.Size(1285, 1057);
@@ -663,6 +661,7 @@
             this.cmbTAloanID.Name = "cmbTAloanID";
             this.cmbTAloanID.Size = new System.Drawing.Size(375, 33);
             this.cmbTAloanID.TabIndex = 16;
+            this.cmbTAloanID.Visible = false;
             this.cmbTAloanID.Validating += new System.ComponentModel.CancelEventHandler(this.cmbTAloanID_Validating);
             this.cmbTAloanID.Validated += new System.EventHandler(this.cmbTAloanID_Validated);
             // 
@@ -1481,7 +1480,7 @@
             this.pnlLGraph.BackgroundColor = System.Drawing.Color.White;
             this.pnlLGraph.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlLGraph.BorderThickness = 1;
-            this.pnlLGraph.Controls.Add(this.chtLbalance);
+            this.pnlLGraph.Controls.Add(this.chtLLoans);
             this.pnlLGraph.IsDerivedStyle = true;
             this.pnlLGraph.Location = new System.Drawing.Point(55, 591);
             this.pnlLGraph.Name = "pnlLGraph";
@@ -1492,14 +1491,13 @@
             this.pnlLGraph.ThemeAuthor = "Narwin";
             this.pnlLGraph.ThemeName = "MetroLite";
             // 
-            // chtLbalance
+            // chtLLoans
             // 
-            this.chtLbalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtLbalance.Location = new System.Drawing.Point(0, 0);
-            this.chtLbalance.Name = "chtLbalance";
-            this.chtLbalance.Size = new System.Drawing.Size(1105, 564);
-            this.chtLbalance.TabIndex = 0;
-            this.chtLbalance.Text = "cartesianChart3";
+            this.chtLLoans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtLLoans.Location = new System.Drawing.Point(0, 0);
+            this.chtLLoans.Name = "chtLLoans";
+            this.chtLLoans.Size = new System.Drawing.Size(1105, 564);
+            this.chtLLoans.TabIndex = 0;
             // 
             // tbcLoansView
             // 
@@ -2360,7 +2358,7 @@
             this.pnlCGraph.BackgroundColor = System.Drawing.Color.White;
             this.pnlCGraph.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlCGraph.BorderThickness = 1;
-            this.pnlCGraph.Controls.Add(this.chtCbalance);
+            this.pnlCGraph.Controls.Add(this.chtCTrans);
             this.pnlCGraph.IsDerivedStyle = true;
             this.pnlCGraph.Location = new System.Drawing.Point(35, 911);
             this.pnlCGraph.Name = "pnlCGraph";
@@ -2371,14 +2369,13 @@
             this.pnlCGraph.ThemeAuthor = "Narwin";
             this.pnlCGraph.ThemeName = "MetroLite";
             // 
-            // chtCbalance
+            // chtCTrans
             // 
-            this.chtCbalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtCbalance.Location = new System.Drawing.Point(0, 0);
-            this.chtCbalance.Name = "chtCbalance";
-            this.chtCbalance.Size = new System.Drawing.Size(2450, 282);
-            this.chtCbalance.TabIndex = 0;
-            this.chtCbalance.Text = "cartesianChart4";
+            this.chtCTrans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtCTrans.Location = new System.Drawing.Point(0, 0);
+            this.chtCTrans.Name = "chtCTrans";
+            this.chtCTrans.Size = new System.Drawing.Size(2450, 282);
+            this.chtCTrans.TabIndex = 0;
             // 
             // tbBudget
             // 
@@ -2777,9 +2774,9 @@
             this.pnlBcharts.BackgroundColor = System.Drawing.Color.White;
             this.pnlBcharts.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlBcharts.BorderThickness = 1;
-            this.pnlBcharts.Controls.Add(this.pieChart1);
+            this.pnlBcharts.Controls.Add(this.pieBCategory);
             this.pnlBcharts.Controls.Add(this.metroSetDivider2);
-            this.pnlBcharts.Controls.Add(this.chtBbalance);
+            this.pnlBcharts.Controls.Add(this.chtBCategory);
             this.pnlBcharts.IsDerivedStyle = true;
             this.pnlBcharts.Location = new System.Drawing.Point(55, 710);
             this.pnlBcharts.Name = "pnlBcharts";
@@ -2790,14 +2787,13 @@
             this.pnlBcharts.ThemeAuthor = "Narwin";
             this.pnlBcharts.ThemeName = "MetroLite";
             // 
-            // pieChart1
+            // pieBCategory
             // 
-            this.pieChart1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pieChart1.Location = new System.Drawing.Point(0, 0);
-            this.pieChart1.Name = "pieChart1";
-            this.pieChart1.Size = new System.Drawing.Size(585, 483);
-            this.pieChart1.TabIndex = 2;
-            this.pieChart1.Text = "pieBbudget";
+            this.pieBCategory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pieBCategory.Location = new System.Drawing.Point(0, 0);
+            this.pieBCategory.Name = "pieBCategory";
+            this.pieBCategory.Size = new System.Drawing.Size(585, 483);
+            this.pieBCategory.TabIndex = 2;
             // 
             // metroSetDivider2
             // 
@@ -2814,14 +2810,13 @@
             this.metroSetDivider2.ThemeName = "MetroLite";
             this.metroSetDivider2.Thickness = 1;
             // 
-            // chtBbalance
+            // chtBCategory
             // 
-            this.chtBbalance.Dock = System.Windows.Forms.DockStyle.Right;
-            this.chtBbalance.Location = new System.Drawing.Point(716, 0);
-            this.chtBbalance.Name = "chtBbalance";
-            this.chtBbalance.Size = new System.Drawing.Size(1710, 483);
-            this.chtBbalance.TabIndex = 0;
-            this.chtBbalance.Text = "cartesianChart1";
+            this.chtBCategory.Dock = System.Windows.Forms.DockStyle.Right;
+            this.chtBCategory.Location = new System.Drawing.Point(716, 0);
+            this.chtBCategory.Name = "chtBCategory";
+            this.chtBCategory.Size = new System.Drawing.Size(1710, 483);
+            this.chtBCategory.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -2928,6 +2923,14 @@
             this.errorProvider1.ContainerControl = this;
             this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
             // 
+            // chtDLoans
+            // 
+            this.chtDLoans.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chtDLoans.Location = new System.Drawing.Point(0, 0);
+            this.chtDLoans.Name = "chtDLoans";
+            this.chtDLoans.Size = new System.Drawing.Size(481, 465);
+            this.chtDLoans.TabIndex = 3;
+            // 
             // Dashboard
             // 
             this.AllowResize = false;
@@ -3017,9 +3020,8 @@
         private System.Windows.Forms.DataGridView grdDFutTrans;
         private MetroSet_UI.Controls.MetroSetPanel pnlDCharts;
         private MetroSet_UI.Controls.MetroSetDivider metroSetDivider1;
-        private LiveCharts.WinForms.AngularGauge gagDbudget;
-        private LiveCharts.WinForms.PieChart pieDbudget;
-        private LiveCharts.WinForms.CartesianChart chtDbalance;
+        private LiveCharts.WinForms.PieChart pieDCategory;
+        private LiveCharts.WinForms.CartesianChart chtDTrans;
         private MetroSet_UI.Child.MetroSetSetTabPage tbTrans;
         private MetroSet_UI.Controls.MetroSetTabControl tbcTransView;
         private MetroSet_UI.Child.MetroSetSetTabPage tbTPastTrans;
@@ -3068,9 +3070,9 @@
         private MetroSet_UI.Controls.MetroSetButton btnTRemove;
         private MetroSet_UI.Controls.MetroSetPanel pnlDGraph;
         private MetroSet_UI.Controls.MetroSetPanel pnlTGraph;
-        private LiveCharts.WinForms.CartesianChart chtTbalance;
+        private LiveCharts.WinForms.CartesianChart chtTTrans;
         private MetroSet_UI.Controls.MetroSetPanel pnlLGraph;
-        private LiveCharts.WinForms.CartesianChart chtLbalance;
+        private LiveCharts.WinForms.CartesianChart chtLLoans;
         private MetroSet_UI.Controls.MetroSetTabControl tbcLoansView;
         private MetroSet_UI.Child.MetroSetSetTabPage tbLloans;
         private System.Windows.Forms.DataGridView grdLloans;
@@ -3107,7 +3109,7 @@
         private MetroSet_UI.Controls.MetroSetButton btnLRemove;
         private MetroSet_UI.Controls.MetroSetPanel pnlCalendar;
         private MetroSet_UI.Controls.MetroSetPanel pnlCGraph;
-        private LiveCharts.WinForms.CartesianChart chtCbalance;
+        private LiveCharts.WinForms.CartesianChart chtCTrans;
         private MetroSet_UI.Controls.MetroSetTabControl tbcBudgetView;
         private MetroSet_UI.Child.MetroSetSetTabPage tbCcategories;
         private System.Windows.Forms.DataGridView grdBcategories;
@@ -3125,9 +3127,9 @@
         private MetroSet_UI.Controls.MetroSetLabel lblBRcategoryName;
         private MetroSet_UI.Controls.MetroSetButton btnBRemove;
         private MetroSet_UI.Controls.MetroSetPanel pnlBcharts;
-        private LiveCharts.WinForms.PieChart pieChart1;
+        private LiveCharts.WinForms.PieChart pieBCategory;
         private MetroSet_UI.Controls.MetroSetDivider metroSetDivider2;
-        private LiveCharts.WinForms.CartesianChart chtBbalance;
+        private LiveCharts.WinForms.CartesianChart chtBCategory;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripTextBox txtTSusername;
@@ -3142,5 +3144,6 @@
         private System.Windows.Forms.ComboBox cmbTAloanID;
         private System.Windows.Forms.ComboBox cmbTEloanID;
         private System.Windows.Forms.ComboBox cmbTEcategoryID;
+        private LiveCharts.WinForms.CartesianChart chtDLoans;
     }
 }

@@ -16,4 +16,9 @@ namespace FinanceDll
     {
         public decimal RemainingBalance { get; set; }
     }
+
+    public partial class Category
+    {
+        public decimal MonthValue { get; set; }
+    }
 }

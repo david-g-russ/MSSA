@@ -99,6 +99,7 @@
             this.Name = "LoadingSplash";
             this.ShowLeftRect = false;
             this.ShowTitle = false;
+            this.Load += new System.EventHandler(this.LoadingSplash_Load);
             this.ResumeLayout(false);
 
         }

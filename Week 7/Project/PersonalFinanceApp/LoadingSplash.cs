@@ -20,5 +20,10 @@ namespace PersonalFinanceApp
         {
            InitializeComponent();
         }
+
+        private void LoadingSplash_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

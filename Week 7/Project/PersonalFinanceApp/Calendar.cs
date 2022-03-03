@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using FinanceDll;
 
 namespace PersonalFinanceApp
 {
@@ -15,13 +16,17 @@ namespace PersonalFinanceApp
     {
         int month; 
         int year;
-        public Calendar()
+        FinanceDB repo;
+        int userID;
+        public Calendar(int id)
         {
             InitializeComponent();
+            this.userID = id;
         }
 
         private void Calendar_Load(object sender, EventArgs e)
         {
+            repo = new FinanceDB();
             year = DateTime.Now.Year;
             month = DateTime.Now.Month;
             DisplayDays(year, month);
@@ -45,6 +50,17 @@ namespace PersonalFinanceApp
             {
                 UserControlDays ucDays = new UserControlDays();
                 ucDays.Days(i);
+
+                DateTime date = startDay.AddDays(i-1);
+                DateTime yesterday = date.Subtract(TimeSpan.FromDays(1));
+
+                decimal balance = repo.SumPastTransactions(userID, date);
+                ucDays.Balance(balance);
+
+                decimal netChange = balance - repo.SumPastTransactions(userID, yesterday);
+                ucDays.NetChange(netChange);
+                
+
                 flwDayContainer.Controls.Add(ucDays);
             }
         }

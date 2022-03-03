@@ -23,10 +23,6 @@ namespace FinanceDll
         ICollection<Loan> GetLoans(int id);
         ICollection<Category> GetCategories();
 
-        // Get next key from DB
-
-        int GetMaxId();
-
         // Find specific entry in DB
         Transaction FindTransaction(int id);
         User FindUser(int id);
@@ -38,7 +34,11 @@ namespace FinanceDll
 
         // Separate past and future transactions in DB into lists
         ICollection<Transaction> PastTransactions(int id);
+        ICollection<Transaction> PastTransactions(int id, DateTime date);
+        decimal SumPastTransactions(int id, DateTime date);
+        ICollection<Transaction> MonthTransactions(int id, DateTime date);
         ICollection<Transaction> FutureTransactions(int id);
+        ICollection<Category> MonthCategories(int id, DateTime date);
 
         // Update specific entry in DB
         void UpdateTransaction(int id, Transaction transChanges);
@@ -173,6 +173,27 @@ namespace FinanceDll
             entities.SaveChanges();
         }
 
+        public void AddRecur(Transaction trans, int durationMonths)
+        {
+            foreach (var c in entities.Categories) // use category name from category table to populate readable name from ID
+            {
+                if (trans.categoryID == c.categoryID)
+                    trans.CategoryName = c.categoryName;
+            }
+            foreach (var l in entities.Loans) // use loan name from loan table to populate readable name from ID
+            {
+                if (trans.loanID == l.loanID)
+                    trans.LoanName = l.loanName;
+            }
+            for (int i = 1; i <= durationMonths; i++)
+            {
+                Transaction transCopy = CopyTransaction(trans);
+                transCopy.date = trans.date.AddMonths(i);
+                AddTransaction(transCopy);
+            }
+            entities.SaveChanges();
+        }
+
         public Transaction CopyTransaction(Transaction trans)
         {
             Transaction transCopy = new Transaction();
@@ -188,28 +209,6 @@ namespace FinanceDll
             return transCopy;
         }
 
-        public void AddRecur(Transaction trans, int durationMonths)
-        {
-            foreach (var c in entities.Categories) // use category name from category table to populate readable name from ID
-            {
-                if (trans.categoryID == c.categoryID)
-                    trans.CategoryName = c.categoryName;
-            }
-            foreach (var l in entities.Loans) // use loan name from loan table to populate readable name from ID
-            {
-                if (trans.loanID == l.loanID)
-                    trans.LoanName = l.loanName;
-            }
-            DateTime temp = trans.date;
-            for (int i = 1; i <= durationMonths; i++)
-            {
-                trans.transID = GetMaxId() + 1;
-                trans.date = temp.AddMonths(i);
-                entities.Transactions.Add(trans);
-            }
-            entities.SaveChanges();
-        }
-
         public void AddUser(User user)
         {
             entities.Users.Add(user);
@@ -219,18 +218,18 @@ namespace FinanceDll
         public void AddLoan(Loan loan)
         {
             entities.Loans.Add(loan);
+            entities.SaveChanges();
 
             Transaction trans = new Transaction();
             trans.transName = loan.loanName;
-            trans.value = loan.payment;
+            trans.value = -loan.payment;
             trans.date = DateTime.Now;
             trans.isRecurring = true;
             trans.recurIntervalDays = 31;
             trans.categoryID = FindCategory("Loans").categoryID;
             trans.userID = loan.userID;
-            trans.loanID = loan.loanID;
+            trans.loanID = FindLoan(loan.loanName).loanID;
 
-            AddTransaction(trans);
             AddRecur(trans,loan.durationMonths);
 
             entities.SaveChanges();
@@ -258,8 +257,8 @@ namespace FinanceDll
         public ICollection<Transaction> GetRecur(Transaction trans)
         {
             return (from t in entities.Transactions
-                             where t.date > DateTime.Now && t.transName == trans.transName && t.value == trans.value
-                             select t).ToList();
+                    where t.date > DateTime.Now && t.transName == trans.transName && t.value == trans.value
+                    select t).ToList();
         }
 
         public ICollection<User> GetUsers(int id)
@@ -291,6 +290,31 @@ namespace FinanceDll
                         select t).ToList();
         }
 
+        public ICollection<Transaction> PastTransactions(int id, DateTime date)
+        {
+            return (from t in entities.Transactions
+                    where t.date <= date && t.userID == id
+                    orderby t.date descending
+                    select t).ToList();
+        }
+
+        public decimal SumPastTransactions(int id, DateTime date)
+        {
+            decimal sum = 0;
+            ICollection<Transaction> transList = PastTransactions(id, date);
+            foreach (var trans in transList)
+                sum += trans.value;
+            return sum;
+        }
+
+        public ICollection<Transaction> MonthTransactions(int id, DateTime date)
+        {
+            return (from t in entities.Transactions
+                    where t.date.Year == date.Year && t.date.Month == date.Month && t.userID == id
+                    orderby t.date ascending
+                    select t).ToList();
+        }
+
         public ICollection<Transaction> FutureTransactions(int id)
         {
             return (from t in entities.Transactions
@@ -299,11 +323,19 @@ namespace FinanceDll
                         select t).ToList();
         }
 
-        // Get next key from Transaction table
-
-        public int GetMaxId()
+        public ICollection<Category> MonthCategories(int id, DateTime date)
         {
-            return entities.Transactions.Max(n => n.transID);
+            var mTrans = MonthTransactions(id, date);
+            foreach (var trans in mTrans)
+            {
+                foreach (var cat in entities.Categories)
+                {
+                    if (cat.categoryID == trans.categoryID)
+                        cat.MonthValue += trans.value;
+                }
+
+            }
+            return entities.Categories.ToList();
         }
 
         // Return specific entry from tables
@@ -414,7 +446,7 @@ namespace FinanceDll
 
             Transaction newtrans = new Transaction();
             newtrans.transName = loanChanges.loanName;
-            newtrans.value = loanChanges.payment;
+            newtrans.value = -loanChanges.payment;
             newtrans.date = DateTime.Now;
             newtrans.isRecurring = true;
             newtrans.recurIntervalDays = 31;
@@ -435,6 +467,11 @@ namespace FinanceDll
 
         public void UpdateCategory(int id, Category catChanges)
         {
+            var transCats = (from t in entities.Transactions
+                             where t.categoryID == id
+                             select t).ToList();
+            foreach (var cat in transCats)
+                cat.CategoryName = catChanges.categoryName;
             var categoryToUpdate = entities.Categories.Find(id);
             categoryToUpdate.categoryName = catChanges.categoryName;
             entities.SaveChanges();
@@ -456,6 +493,8 @@ namespace FinanceDll
             var recurList = GetRecur(trans);
             foreach (var recur in recurList)
                 entities.Transactions.Remove(recur);
+            if (trans.transID != 0)
+                entities.Transactions.Remove(trans);
             entities.SaveChanges();
         }
 
@@ -467,12 +506,26 @@ namespace FinanceDll
 
         public void DeleteLoan(Loan loan)
         {
+            Transaction searchTrans = new Transaction();
+            searchTrans.transName = loan.loanName;
+            searchTrans.value = loan.payment;
+
+            DeleteRecur(searchTrans);
+
             entities.Loans.Remove(loan);
             entities.SaveChanges();
         }
 
         public void DeleteCategory(Category cat)
         {
+            var transCats = (from t in entities.Transactions
+                             where t.categoryID == cat.categoryID
+                             select t).ToList();
+            foreach (var trans in transCats)
+            {
+                trans.categoryID = entities.Categories.First().categoryID;
+                trans.CategoryName = entities.Categories.First().categoryName;
+            }
             entities.Categories.Remove(cat);
             entities.SaveChanges();
         }

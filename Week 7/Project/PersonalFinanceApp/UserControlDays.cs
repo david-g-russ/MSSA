@@ -25,5 +25,28 @@ namespace PersonalFinanceApp
         {
             lblCCDay.Text = numday.ToString();
         }
+
+        public void NetChange(decimal net)
+        {
+            lblCCNetChange.Text = net.ToString("c");
+            if (net > 0)
+                lblCCNetChange.ForeColor = Color.Green;
+            else if (net == 0)
+                lblCCNetChange.ForeColor = Color.DarkGray;
+            else
+                lblCCNetChange.ForeColor = Color.Red;
+        }
+
+        public void Balance(decimal bal)
+        {
+            lblCCbalance.Text = bal.ToString("c");
+            
+            if (bal > 0)
+                lblCCbalance.ForeColor = Color.Green;
+            else if (bal == 0)
+                lblCCbalance.ForeColor = Color.DarkGray;
+            else
+                lblCCbalance.ForeColor = Color.Red;
+        }
     }
 }

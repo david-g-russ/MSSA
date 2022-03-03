@@ -10,7 +10,10 @@ using System.Windows.Forms;
 using FinanceDll;
 using LiveCharts;
 using LiveCharts.WinForms;
+using LiveCharts.Wpf;
 using MetroSet_UI.Forms;
+using System.Globalization;
+
 
 namespace PersonalFinanceApp
 {
@@ -18,10 +21,12 @@ namespace PersonalFinanceApp
     {
         #region Form Initialization
 
-        
-        FinanceDB repo; // repo class initialization
-        string errorMsg; // error handler string initialization
+        FinanceDB repo; 
+        string errorMsg; 
         int userID;
+        SeriesCollection transCollection;
+        SeriesCollection loanCollection;
+        SeriesCollection catCollection;
 
         public Dashboard(int ID)
         {
@@ -34,9 +39,18 @@ namespace PersonalFinanceApp
             repo = new FinanceDB(); // initialize instance of FinanceDB class
             var user = repo.FindUser(userID);
 
+            GetChartT(chtDTrans);
+            GetChartT(chtTTrans);
+            GetChartT(chtCTrans);
+            GetChartT(chtBCategory);
+            GetChartL(chtDLoans);
+            GetChartL(chtLLoans);
+            GetChartC(pieDCategory);
+            GetChartC(pieBCategory);
+
             AutoScaleMode = AutoScaleMode.None; // pesky, meddling autoscaling disabled
 
-            Form fCalendar = new Calendar(); // instantiate and open child form Calendar in the Calendar tab
+            Form fCalendar = new Calendar(userID); // instantiate and open child form Calendar in the Calendar tab
             OpenChildForm(fCalendar);
 
             AutoValidate = AutoValidate.EnableAllowFocusChange; // allow user to exit fields that aren't validated
@@ -45,18 +59,11 @@ namespace PersonalFinanceApp
             cmbTAloanID.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTEcategoryID.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTEloanID.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (var c in repo.GetCategories()) // populate comboboxes from category table
-            {
-                cmbTAcategoryID.Items.Add(c.categoryName);
-                cmbTEcategoryID.Items.Add(c.categoryName);
-            }
-            foreach (var l in repo.GetLoans(userID)) // populate comboboxes from loan table
-            {
-                cmbTAloanID.Items.Add(l.loanName);
-                cmbTEloanID.Items.Add(l.loanName);
-            }
 
             txtTSusername.Text = user.username;
+
+            RefreshCMBC();
+            RefreshCMBL();
 
             RefreshDataT(); // run refresh data function for each grid for initial population
             RefreshDataC();
@@ -143,6 +150,10 @@ namespace PersonalFinanceApp
                     btnBEdit.Enabled = true;
                     btnBRemove.Enabled = true;
                     grdBcategories.Columns[2].Visible = false;
+                    grdBcategories.Columns[0].HeaderText = "Category ID";
+                    grdBcategories.Columns[1].HeaderText = "Category Name";
+                    grdBcategories.Columns[3].HeaderText = "Spent This Month";
+                    grdBcategories.Columns[3].DefaultCellStyle.Format = "C";
                 }
                 else // if there are no categories, set grid view to invisible and disable edit/remove buttons
                 {
@@ -184,7 +195,7 @@ namespace PersonalFinanceApp
                 grid.Columns[1].DisplayIndex = 0;
                 grid.Columns[1].HeaderText = "Loan Name";
                 grid.Columns[2].DisplayIndex = 1;
-                grid.Columns[2].HeaderText = "Balance";
+                grid.Columns[2].HeaderText = "Initial Balance";
                 grid.Columns[2].DefaultCellStyle.Format = "c";
                 grid.Columns[3].DisplayIndex = 2;
                 grid.Columns[3].HeaderText = "Duration (Months)";
@@ -194,12 +205,50 @@ namespace PersonalFinanceApp
                 grid.Columns[5].DisplayIndex = 4;
                 grid.Columns[5].HeaderText = "Payment Amount";
                 grid.Columns[5].DefaultCellStyle.Format = "c";
-                grid.Columns[0].DisplayIndex = 5;
+                grid.Columns["RemainingBalance"].DisplayIndex = 5;
+                grid.Columns["RemainingBalance"].HeaderText = "Remaining Balance";
+                grid.Columns["RemainingBalance"].DefaultCellStyle.Format = "c";
+                grid.Columns[0].DisplayIndex = 6;
                 grid.Columns[0].Visible = false;
-                grid.Columns[6].DisplayIndex = 6;
+                grid.Columns[6].DisplayIndex = 7;
                 grid.Columns[6].Visible = false;
-                grid.Columns[7].DisplayIndex = 7;
+                grid.Columns[7].DisplayIndex = 8;
                 grid.Columns[7].Visible = false;
+            }
+
+            private void RefreshCMBC()
+            {
+                cmbTAcategoryID.Items.Clear();
+                cmbTEcategoryID.Items.Clear();
+                foreach (var c in repo.GetCategories()) // populate comboboxes from category table
+                {
+                    cmbTAcategoryID.Items.Add(c.categoryName);
+                    cmbTEcategoryID.Items.Add(c.categoryName);
+                }
+            }
+
+            private void RefreshCMBL()
+            {
+                cmbTAloanID.Items.Clear();
+                cmbTEloanID.Items.Clear();
+                foreach (var l in repo.GetLoans(userID)) // populate comboboxes from loan table
+                {
+                    cmbTAloanID.Items.Add(l.loanName);
+                    cmbTEloanID.Items.Add(l.loanName);
+                }
+            }
+
+            private void RefreshBalance()
+            {
+                foreach (var l in repo.GetLoans(userID))
+                {
+                    l.RemainingBalance = l.balance;
+                    foreach (var t in repo.GetTransactions(userID))
+                    {
+                        if (l.loanID == t.loanID && t.date <= DateTime.Now)
+                            l.RemainingBalance += t.value;
+                    }
+                }
             }
 
             #endregion SUB - Refresh Functions
@@ -260,7 +309,7 @@ namespace PersonalFinanceApp
             {
                 if (cmbTEcategoryID.SelectedItem != null)
                 {
-                    if (repo.FindCategory(cmbTEcategoryID.SelectedItem.ToString()).categoryName == "Loans")
+                    if (cmbTEcategoryID.SelectedItem.ToString() == "Loans")
                     {
                         lblTEloanID.Visible = true;
                         cmbTEloanID.Visible = true;
@@ -288,7 +337,7 @@ namespace PersonalFinanceApp
             }
             private void grdTPastTrans_SelectionChanged(object sender, EventArgs e)
             {
-                if (grdTPastTrans.CurrentRow.Cells[2].Value != null)
+                if (grdTPastTrans.CurrentRow != null)
                 {
                     int id = Int32.Parse(grdTPastTrans.CurrentRow.Cells[2].Value.ToString());
                     if (repo.FindTransaction(id) != null)
@@ -325,7 +374,7 @@ namespace PersonalFinanceApp
 
             private void grdTFutTrans_SelectionChanged(object sender, EventArgs e)
             {
-                if (grdTFutTrans.CurrentRow.Cells[2].Value != null)
+                if (grdTFutTrans.CurrentRow != null)
                 {
                     int id = Int32.Parse(grdTFutTrans.CurrentRow.Cells[2].Value.ToString());
                     if (repo.FindTransaction(id) != null)
@@ -362,7 +411,7 @@ namespace PersonalFinanceApp
 
             private void grdLloans_SelectionChanged(object sender, EventArgs e)
             {
-                if (grdLloans.CurrentRow.Cells[0].Value != null)
+                if (grdLloans.CurrentRow != null)
                 {
                     int id = Int32.Parse(grdLloans.CurrentRow.Cells[0].Value.ToString());
                     if (repo.FindLoan(id) != null)
@@ -413,23 +462,150 @@ namespace PersonalFinanceApp
                     txtBEcategoryName.Text = "No categories to edit.";
                 }
             }
-            
-            #endregion SUB - Event-triggered Functions
 
-        private void OpenChildForm(Form childForm)
+        #endregion SUB - Event-triggered Functions
+
+            #region SUB - Component Automation
+            private void OpenChildForm(Form childForm)
+            {
+                childForm.TopLevel = false;
+                pnlCalendar.Controls.Add(childForm);
+                childForm.Show();
+            }
+
+            private void GetChartT(LiveCharts.WinForms.CartesianChart chart)
+            {
+                DateTime startDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                int numDays = DateTime.DaysInMonth(startDay.Year, startDay.Month);
+                double[] transArray = new double[numDays];
+                string[] labels = new string[numDays];
+                double today = startDay.Day - 1;
+
+                for (int i = 0; i < numDays; i++)
+                {
+                    DateTime date = startDay.AddDays(i);
+                
+                    double balance = (double)repo.SumPastTransactions(userID, date);
+                    transArray[i] = balance;
+                    labels[i] = (i + 1).ToString();    
+                }
+
+                Axis xAxis = new Axis();
+                xAxis.Title = DateTimeFormatInfo.CurrentInfo.MonthNames[DateTime.Now.Month - 1] + " " + DateTime.Now.Year;
+                //AxisSection section = new AxisSection()
+                //{
+                //    Stroke = System.Windows.Media.Brushes.Black,
+                //    StrokeThickness = 2,
+                //    Value = today,
+                //};
+                //SectionsCollection sections = new SectionsCollection() { section };
+                xAxis.Labels = labels;
+                //xAxis.Sections = sections;
+
+                Axis yAxis = new Axis();
+                Func<double, string> yFormatter = value => value.ToString("C");
+                yAxis.Title = "Balance";
+                yAxis.LabelFormatter = yFormatter;
+           
+
+                ChartValues<double> transValues = new ChartValues<double>();
+                foreach (double value in transArray)
+                    transValues.Add(value);
+
+                LineSeries transSeries = new LineSeries() { Values = transValues};
+            
+                transCollection = new SeriesCollection() { transSeries };
+
+                chart.Series = transCollection;
+                chart.AxisX.Add(xAxis);         
+                chart.AxisY.Add(yAxis);
+            }
+
+            private void GetChartL(LiveCharts.WinForms.CartesianChart chart)
+            {
+                var loanList = repo.GetLoans(userID);
+                string[] labels = new string[loanList.Count];
+                double[] balance = new double[loanList.Count];
+                ChartValues<double> bValues = new ChartValues<double>();
+                double[] rembalance = new double[loanList.Count];
+                ChartValues<double> rValues = new ChartValues<double>();
+                int i = 0;
+                foreach( var loan in loanList)
+                {
+                    labels[i] = loan.loanName;
+                    rembalance[i] = (double)loan.RemainingBalance;
+                    rValues.Add(rembalance[i]);
+                    balance[i] = (double)loan.balance - rembalance[i];
+                    bValues.Add(balance[i]);
+                    i++;
+                }
+
+                Axis yAxis = new Axis();
+                yAxis.Title = "Loans";
+                yAxis.Labels = labels;
+
+                Axis xAxis = new Axis();
+                Func<double, string> xFormatter = value => value.ToString("C");
+                xAxis.Title = "Balance";
+                xAxis.LabelFormatter = xFormatter;
+
+                loanCollection = new SeriesCollection()
+                {
+                    new StackedRowSeries()
+                    {
+                        Values = bValues,
+                        DataLabels = true,
+                        Title = "Balance Paid Off",  
+                    },
+                    new StackedRowSeries()
+                    {
+                        Values = rValues,
+                        DataLabels = true,
+                        Title = "Balance Remaining"
+                    }
+                };
+
+                chart.Series = loanCollection;
+                chart.AxisX.Add(xAxis);
+                chart.AxisY.Add(yAxis);
+                chart.LegendLocation = LegendLocation.Bottom;
+
+            }
+
+        private void GetChartC(LiveCharts.WinForms.PieChart chart)
         {
-            childForm.TopLevel = false;
-            pnlCalendar.Controls.Add(childForm);
-            childForm.Show();
+            catCollection = new SeriesCollection();
+            DateTime today = DateTime.Now;
+            var catList = repo.MonthCategories(userID, today);
+            Func<ChartPoint, string> pointLabel = chartPoint => String.Format("{0:C} ({1:P1})", chartPoint.Y, chartPoint.Participation);
+            foreach (var cat in catList)
+            {
+                if (cat.MonthValue > 0)
+                {
+                    PieSeries series = new PieSeries()
+                    {
+                        Values = new ChartValues<double> { (double)cat.MonthValue },
+                        Title = cat.categoryName,
+                        DataLabels = true,
+                        LabelPoint = pointLabel
+                    };
+                    catCollection.Add(series);
+                }
+            }
+
+            chart.Series = catCollection;
+            chart.LegendLocation= LegendLocation.Bottom;
         }
+
+            #endregion SUB - Component Automation
 
         #endregion Automated Functions
 
         #region Validation
 
-            #region SUB - Bool Checks
+        #region SUB - Bool Checks
 
-            private bool TAValid()
+        private bool TAValid()
             {
                 if (errorProvider1.GetError(txtTAtransName) == "" && errorProvider1.GetError(txtTAvalue) == "" &&
                     errorProvider1.GetError(cmbTAcategoryID) == "" && errorProvider1.GetError(dteTAdate) == "" &&
@@ -971,6 +1147,8 @@ namespace PersonalFinanceApp
                 {
                     repo.AddTransaction(newTrans);
                     RefreshDataT();
+                    RefreshDataL();
+                    RefreshBalance();
                     ClearT();
                 }
                 else if (swTAisRecurring.Switched)
@@ -979,8 +1157,12 @@ namespace PersonalFinanceApp
                     repo.AddTransaction(newTrans);
                     repo.AddRecur(newTrans);
                     RefreshDataT();
+                    RefreshDataL();
+                    RefreshBalance();
                     ClearT();
                 }
+                if (newTrans.loanID != null)
+                    RefreshBalance();
             }
         }
 
@@ -996,7 +1178,8 @@ namespace PersonalFinanceApp
                         id = Int32.Parse(grdTPastTrans.CurrentRow.Cells[2].Value.ToString());
                     else
                         id = Int32.Parse(grdTFutTrans.CurrentRow.Cells[2].Value.ToString());
-                    var uTrans = repo.FindTransaction(id);
+                    //var uTrans = repo.FindTransaction(id);
+                    FinanceDll.Transaction uTrans = new FinanceDll.Transaction();
                     uTrans.transName = txtTEtransName.Text;
                     uTrans.value = Decimal.Parse(txtTEvalue.Text);
                     uTrans.date = dteTEdate.Value;
@@ -1013,6 +1196,8 @@ namespace PersonalFinanceApp
                         uTrans.loanID = null;
                     repo.UpdateTransaction(id, uTrans);
                     RefreshDataT();
+                    if (uTrans.loanID != null)
+                        RefreshBalance();
                 }
                 else
                     MessageBox.Show("Please select a transaction to edit from one of the tabs on the right.");
@@ -1027,7 +1212,10 @@ namespace PersonalFinanceApp
             else
                 id = Int32.Parse(grdTFutTrans.CurrentRow.Cells[2].Value.ToString());
             var dTrans = repo.FindTransaction(id);
-            repo.DeleteTransaction(dTrans);
+            if(dTrans.isRecurring)
+                repo.DeleteRecur(dTrans);
+            else
+                repo.DeleteTransaction(dTrans);
             MessageBox.Show($"Transaction '{dTrans.transName}' has been deleted.");
             RefreshDataT();
         }
@@ -1043,9 +1231,13 @@ namespace PersonalFinanceApp
                 newLoan.durationMonths = Int32.Parse(txtLAdurationMonths.Text);
                 newLoan.fixedAPR = Decimal.Parse(txtLAfixedAPR.Text);
                 newLoan.payment = Int32.Parse(txtLApayment.Text);
+                newLoan.userID = userID;
                 repo.AddLoan(newLoan);
+                RefreshDataT();
                 RefreshDataL();
                 ClearL();
+                RefreshCMBL();
+                RefreshBalance();
             }
         }
 
@@ -1065,6 +1257,9 @@ namespace PersonalFinanceApp
                     uLoan.payment = Decimal.Parse(txtLEpayment.Text);
                     repo.UpdateLoan(id, uLoan);
                     RefreshDataL();
+                    RefreshDataT();
+                    RefreshCMBL();
+                    RefreshBalance();
                 }
                 else
                     MessageBox.Show("Please select a loan to edit from the panel on the right.");
@@ -1073,11 +1268,18 @@ namespace PersonalFinanceApp
 
         private void btnLRemove_Click(object sender, EventArgs e)
         {
-            int id = Int32.Parse(grdLloans.CurrentRow.Cells[0].Value.ToString());
-            var dLoan = repo.FindLoan(id);
-            repo.DeleteLoan(dLoan);
-            MessageBox.Show($"Loan '{dLoan.loanName}' has been deleted.");
-            RefreshDataL();
+            if (grdLloans.CurrentRow != null)
+            {
+                int id = Int32.Parse(grdLloans.CurrentRow.Cells[0].Value.ToString());
+                var dLoan = repo.FindLoan(id);
+                repo.DeleteLoan(dLoan);
+                MessageBox.Show($"Loan '{dLoan.loanName}' has been deleted.");
+                RefreshDataL();
+                RefreshDataT();
+                RefreshCMBL();
+            }
+            else
+                MessageBox.Show("There are no loans to remove.");
         }
 
         private void btnBAdd_Click(object sender, EventArgs e)
@@ -1090,6 +1292,7 @@ namespace PersonalFinanceApp
                 repo.AddCategory(newCategory);
                 RefreshDataC();
                 txtBAcategoryName.Text = null;
+                RefreshCMBC();
             }
         }
 
@@ -1103,6 +1306,8 @@ namespace PersonalFinanceApp
                 uCategory.categoryName = txtBEcategoryName.Text;
                 repo.UpdateCategory(id, uCategory);
                 RefreshDataC();
+                RefreshDataT();
+                RefreshCMBC();
             }
         }
 
@@ -1113,7 +1318,10 @@ namespace PersonalFinanceApp
             repo.DeleteCategory(dCategory);
             MessageBox.Show($"Category '{dCategory.categoryName}' has been deleted.");
             RefreshDataC();
+            RefreshDataT();
+            RefreshCMBC();
         }
+
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangePassword changePassword = new ChangePassword(userID);
