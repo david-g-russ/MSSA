@@ -42,6 +42,7 @@
             this.tbDFutTrans = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.grdDFutTrans = new System.Windows.Forms.DataGridView();
             this.pnlDCharts = new MetroSet_UI.Controls.MetroSetPanel();
+            this.chtDLoans = new LiveCharts.WinForms.CartesianChart();
             this.metroSetDivider1 = new MetroSet_UI.Controls.MetroSetDivider();
             this.pieDCategory = new LiveCharts.WinForms.PieChart();
             this.tbTrans = new MetroSet_UI.Child.MetroSetSetTabPage();
@@ -132,6 +133,18 @@
             this.btnLRemove = new MetroSet_UI.Controls.MetroSetButton();
             this.tbCalendar = new MetroSet_UI.Child.MetroSetSetTabPage();
             this.pnlCalendar = new MetroSet_UI.Controls.MetroSetPanel();
+            this.lblYear = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblMonth = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblSaturday = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblFri = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblThurs = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblWed = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblTuesday = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblMonday = new MetroSet_UI.Controls.MetroSetLabel();
+            this.lblSunday = new MetroSet_UI.Controls.MetroSetLabel();
+            this.btnPrevious = new MetroSet_UI.Controls.MetroSetButton();
+            this.btnNext = new MetroSet_UI.Controls.MetroSetButton();
+            this.flwDayContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlCGraph = new MetroSet_UI.Controls.MetroSetPanel();
             this.chtCTrans = new LiveCharts.WinForms.CartesianChart();
             this.tbBudget = new MetroSet_UI.Child.MetroSetSetTabPage();
@@ -165,7 +178,6 @@
             this.lblSubHeading = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.chtDLoans = new LiveCharts.WinForms.CartesianChart();
             this.tbcMain.SuspendLayout();
             this.tbDash.SuspendLayout();
             this.pnlDGraph.SuspendLayout();
@@ -196,6 +208,7 @@
             this.tbLEdit.SuspendLayout();
             this.tbLRemove.SuspendLayout();
             this.tbCalendar.SuspendLayout();
+            this.pnlCalendar.SuspendLayout();
             this.pnlCGraph.SuspendLayout();
             this.tbBudget.SuspendLayout();
             this.tbcBudgetView.SuspendLayout();
@@ -257,14 +270,14 @@
             this.tbcMain.Controls.Add(this.tbLoans);
             this.tbcMain.Controls.Add(this.tbCalendar);
             this.tbcMain.Controls.Add(this.tbBudget);
-            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tbcMain.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tbcMain.ImageList = this.imageList1;
             this.tbcMain.IsDerivedStyle = true;
             this.tbcMain.ItemSize = new System.Drawing.Size(100, 38);
             this.tbcMain.Location = new System.Drawing.Point(12, 186);
             this.tbcMain.Name = "tbcMain";
-            this.tbcMain.SelectedIndex = 0;
+            this.tbcMain.SelectedIndex = 3;
             this.tbcMain.SelectedTextColor = System.Drawing.Color.White;
             this.tbcMain.Size = new System.Drawing.Size(2536, 1242);
             this.tbcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -431,6 +444,14 @@
             this.pnlDCharts.TabIndex = 3;
             this.pnlDCharts.ThemeAuthor = "Narwin";
             this.pnlDCharts.ThemeName = "MetroLite";
+            // 
+            // chtDLoans
+            // 
+            this.chtDLoans.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chtDLoans.Location = new System.Drawing.Point(0, 0);
+            this.chtDLoans.Name = "chtDLoans";
+            this.chtDLoans.Size = new System.Drawing.Size(481, 465);
+            this.chtDLoans.TabIndex = 3;
             // 
             // metroSetDivider1
             // 
@@ -1628,7 +1649,7 @@
             this.txtLApayment.MaxLength = 32767;
             this.txtLApayment.Multiline = false;
             this.txtLApayment.Name = "txtLApayment";
-            this.txtLApayment.ReadOnly = false;
+            this.txtLApayment.ReadOnly = true;
             this.txtLApayment.Size = new System.Drawing.Size(375, 30);
             this.txtLApayment.Style = MetroSet_UI.Enums.Style.Light;
             this.txtLApayment.StyleManager = null;
@@ -1638,8 +1659,6 @@
             this.txtLApayment.ThemeName = "MetroLite";
             this.txtLApayment.UseSystemPasswordChar = false;
             this.txtLApayment.WatermarkText = "";
-            this.txtLApayment.Validating += new System.ComponentModel.CancelEventHandler(this.txtLApayment_Validating);
-            this.txtLApayment.Validated += new System.EventHandler(this.txtLApayment_Validated);
             // 
             // txtLAdurationMonths
             // 
@@ -1925,7 +1944,7 @@
             this.txtLEpayment.MaxLength = 32767;
             this.txtLEpayment.Multiline = false;
             this.txtLEpayment.Name = "txtLEpayment";
-            this.txtLEpayment.ReadOnly = false;
+            this.txtLEpayment.ReadOnly = true;
             this.txtLEpayment.Size = new System.Drawing.Size(375, 30);
             this.txtLEpayment.Style = MetroSet_UI.Enums.Style.Light;
             this.txtLEpayment.StyleManager = null;
@@ -1935,8 +1954,6 @@
             this.txtLEpayment.ThemeName = "MetroLite";
             this.txtLEpayment.UseSystemPasswordChar = false;
             this.txtLEpayment.WatermarkText = "";
-            this.txtLEpayment.Validating += new System.ComponentModel.CancelEventHandler(this.txtLEpayment_Validating);
-            this.txtLEpayment.Validated += new System.EventHandler(this.txtLEpayment_Validated);
             // 
             // txtLEdurationMonths
             // 
@@ -2343,6 +2360,18 @@
             this.pnlCalendar.BackgroundColor = System.Drawing.Color.White;
             this.pnlCalendar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.pnlCalendar.BorderThickness = 1;
+            this.pnlCalendar.Controls.Add(this.lblYear);
+            this.pnlCalendar.Controls.Add(this.lblMonth);
+            this.pnlCalendar.Controls.Add(this.lblSaturday);
+            this.pnlCalendar.Controls.Add(this.lblFri);
+            this.pnlCalendar.Controls.Add(this.lblThurs);
+            this.pnlCalendar.Controls.Add(this.lblWed);
+            this.pnlCalendar.Controls.Add(this.lblTuesday);
+            this.pnlCalendar.Controls.Add(this.lblMonday);
+            this.pnlCalendar.Controls.Add(this.lblSunday);
+            this.pnlCalendar.Controls.Add(this.btnPrevious);
+            this.pnlCalendar.Controls.Add(this.btnNext);
+            this.pnlCalendar.Controls.Add(this.flwDayContainer);
             this.pnlCalendar.IsDerivedStyle = true;
             this.pnlCalendar.Location = new System.Drawing.Point(35, 17);
             this.pnlCalendar.Name = "pnlCalendar";
@@ -2352,6 +2381,215 @@
             this.pnlCalendar.TabIndex = 1;
             this.pnlCalendar.ThemeAuthor = "Narwin";
             this.pnlCalendar.ThemeName = "MetroLite";
+            // 
+            // lblYear
+            // 
+            this.lblYear.AutoSize = true;
+            this.lblYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYear.IsDerivedStyle = true;
+            this.lblYear.Location = new System.Drawing.Point(1352, 15);
+            this.lblYear.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblYear.Name = "lblYear";
+            this.lblYear.Size = new System.Drawing.Size(130, 55);
+            this.lblYear.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblYear.StyleManager = null;
+            this.lblYear.TabIndex = 23;
+            this.lblYear.Text = "Year";
+            this.lblYear.ThemeAuthor = "Narwin";
+            this.lblYear.ThemeName = "MetroLite";
+            // 
+            // lblMonth
+            // 
+            this.lblMonth.AutoSize = true;
+            this.lblMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMonth.IsDerivedStyle = true;
+            this.lblMonth.Location = new System.Drawing.Point(989, 15);
+            this.lblMonth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMonth.Name = "lblMonth";
+            this.lblMonth.Size = new System.Drawing.Size(163, 55);
+            this.lblMonth.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblMonth.StyleManager = null;
+            this.lblMonth.TabIndex = 22;
+            this.lblMonth.Text = "Month";
+            this.lblMonth.ThemeAuthor = "Narwin";
+            this.lblMonth.ThemeName = "MetroLite";
+            // 
+            // lblSaturday
+            // 
+            this.lblSaturday.AutoSize = true;
+            this.lblSaturday.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblSaturday.IsDerivedStyle = true;
+            this.lblSaturday.Location = new System.Drawing.Point(2219, 58);
+            this.lblSaturday.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSaturday.Name = "lblSaturday";
+            this.lblSaturday.Size = new System.Drawing.Size(160, 61);
+            this.lblSaturday.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblSaturday.StyleManager = null;
+            this.lblSaturday.TabIndex = 21;
+            this.lblSaturday.Text = "Saturday";
+            this.lblSaturday.ThemeAuthor = "Narwin";
+            this.lblSaturday.ThemeName = "MetroLite";
+            // 
+            // lblFri
+            // 
+            this.lblFri.AutoSize = true;
+            this.lblFri.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblFri.IsDerivedStyle = true;
+            this.lblFri.Location = new System.Drawing.Point(1881, 58);
+            this.lblFri.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFri.Name = "lblFri";
+            this.lblFri.Size = new System.Drawing.Size(119, 61);
+            this.lblFri.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblFri.StyleManager = null;
+            this.lblFri.TabIndex = 20;
+            this.lblFri.Text = "Friday";
+            this.lblFri.ThemeAuthor = "Narwin";
+            this.lblFri.ThemeName = "MetroLite";
+            // 
+            // lblThurs
+            // 
+            this.lblThurs.AutoSize = true;
+            this.lblThurs.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblThurs.IsDerivedStyle = true;
+            this.lblThurs.Location = new System.Drawing.Point(1513, 58);
+            this.lblThurs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblThurs.Name = "lblThurs";
+            this.lblThurs.Size = new System.Drawing.Size(161, 61);
+            this.lblThurs.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblThurs.StyleManager = null;
+            this.lblThurs.TabIndex = 19;
+            this.lblThurs.Text = "Thursday";
+            this.lblThurs.ThemeAuthor = "Narwin";
+            this.lblThurs.ThemeName = "MetroLite";
+            // 
+            // lblWed
+            // 
+            this.lblWed.AutoSize = true;
+            this.lblWed.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblWed.IsDerivedStyle = true;
+            this.lblWed.Location = new System.Drawing.Point(1155, 58);
+            this.lblWed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWed.Name = "lblWed";
+            this.lblWed.Size = new System.Drawing.Size(194, 61);
+            this.lblWed.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblWed.StyleManager = null;
+            this.lblWed.TabIndex = 18;
+            this.lblWed.Text = "Wednesday";
+            this.lblWed.ThemeAuthor = "Narwin";
+            this.lblWed.ThemeName = "MetroLite";
+            // 
+            // lblTuesday
+            // 
+            this.lblTuesday.AutoSize = true;
+            this.lblTuesday.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblTuesday.IsDerivedStyle = true;
+            this.lblTuesday.Location = new System.Drawing.Point(827, 58);
+            this.lblTuesday.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTuesday.Name = "lblTuesday";
+            this.lblTuesday.Size = new System.Drawing.Size(146, 61);
+            this.lblTuesday.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblTuesday.StyleManager = null;
+            this.lblTuesday.TabIndex = 17;
+            this.lblTuesday.Text = "Tuesday";
+            this.lblTuesday.ThemeAuthor = "Narwin";
+            this.lblTuesday.ThemeName = "MetroLite";
+            // 
+            // lblMonday
+            // 
+            this.lblMonday.AutoSize = true;
+            this.lblMonday.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblMonday.IsDerivedStyle = true;
+            this.lblMonday.Location = new System.Drawing.Point(487, 58);
+            this.lblMonday.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMonday.Name = "lblMonday";
+            this.lblMonday.Size = new System.Drawing.Size(147, 61);
+            this.lblMonday.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblMonday.StyleManager = null;
+            this.lblMonday.TabIndex = 16;
+            this.lblMonday.Text = "Monday";
+            this.lblMonday.ThemeAuthor = "Narwin";
+            this.lblMonday.ThemeName = "MetroLite";
+            // 
+            // lblSunday
+            // 
+            this.lblSunday.AutoSize = true;
+            this.lblSunday.Font = new System.Drawing.Font("Reem Kufi", 15.75F);
+            this.lblSunday.IsDerivedStyle = true;
+            this.lblSunday.Location = new System.Drawing.Point(133, 58);
+            this.lblSunday.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSunday.Name = "lblSunday";
+            this.lblSunday.Size = new System.Drawing.Size(136, 61);
+            this.lblSunday.Style = MetroSet_UI.Enums.Style.Light;
+            this.lblSunday.StyleManager = null;
+            this.lblSunday.TabIndex = 15;
+            this.lblSunday.Text = "Sunday";
+            this.lblSunday.ThemeAuthor = "Narwin";
+            this.lblSunday.ThemeName = "MetroLite";
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnPrevious.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnPrevious.DisabledForeColor = System.Drawing.Color.Gray;
+            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnPrevious.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnPrevious.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnPrevious.HoverTextColor = System.Drawing.Color.White;
+            this.btnPrevious.IsDerivedStyle = true;
+            this.btnPrevious.Location = new System.Drawing.Point(678, 31);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnPrevious.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnPrevious.NormalTextColor = System.Drawing.Color.White;
+            this.btnPrevious.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnPrevious.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnPrevious.PressTextColor = System.Drawing.Color.White;
+            this.btnPrevious.Size = new System.Drawing.Size(50, 15);
+            this.btnPrevious.Style = MetroSet_UI.Enums.Style.Light;
+            this.btnPrevious.StyleManager = null;
+            this.btnPrevious.TabIndex = 14;
+            this.btnPrevious.Text = "<";
+            this.btnPrevious.ThemeAuthor = "Narwin";
+            this.btnPrevious.ThemeName = "MetroLite";
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnNext.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnNext.DisabledForeColor = System.Drawing.Color.Gray;
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnNext.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnNext.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnNext.HoverTextColor = System.Drawing.Color.White;
+            this.btnNext.IsDerivedStyle = true;
+            this.btnNext.Location = new System.Drawing.Point(1719, 31);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnNext.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnNext.NormalTextColor = System.Drawing.Color.White;
+            this.btnNext.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnNext.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnNext.PressTextColor = System.Drawing.Color.White;
+            this.btnNext.Size = new System.Drawing.Size(50, 15);
+            this.btnNext.Style = MetroSet_UI.Enums.Style.Light;
+            this.btnNext.StyleManager = null;
+            this.btnNext.TabIndex = 13;
+            this.btnNext.Text = ">";
+            this.btnNext.ThemeAuthor = "Narwin";
+            this.btnNext.ThemeName = "MetroLite";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // flwDayContainer
+            // 
+            this.flwDayContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flwDayContainer.Location = new System.Drawing.Point(0, 126);
+            this.flwDayContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.flwDayContainer.Name = "flwDayContainer";
+            this.flwDayContainer.Size = new System.Drawing.Size(2450, 748);
+            this.flwDayContainer.TabIndex = 12;
             // 
             // pnlCGraph
             // 
@@ -2923,14 +3161,6 @@
             this.errorProvider1.ContainerControl = this;
             this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
             // 
-            // chtDLoans
-            // 
-            this.chtDLoans.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chtDLoans.Location = new System.Drawing.Point(0, 0);
-            this.chtDLoans.Name = "chtDLoans";
-            this.chtDLoans.Size = new System.Drawing.Size(481, 465);
-            this.chtDLoans.TabIndex = 3;
-            // 
             // Dashboard
             // 
             this.AllowResize = false;
@@ -2984,6 +3214,8 @@
             this.tbLRemove.ResumeLayout(false);
             this.tbLRemove.PerformLayout();
             this.tbCalendar.ResumeLayout(false);
+            this.pnlCalendar.ResumeLayout(false);
+            this.pnlCalendar.PerformLayout();
             this.pnlCGraph.ResumeLayout(false);
             this.tbBudget.ResumeLayout(false);
             this.tbcBudgetView.ResumeLayout(false);
@@ -3145,5 +3377,17 @@
         private System.Windows.Forms.ComboBox cmbTEloanID;
         private System.Windows.Forms.ComboBox cmbTEcategoryID;
         private LiveCharts.WinForms.CartesianChart chtDLoans;
+        private MetroSet_UI.Controls.MetroSetLabel lblYear;
+        private MetroSet_UI.Controls.MetroSetLabel lblMonth;
+        private MetroSet_UI.Controls.MetroSetLabel lblSaturday;
+        private MetroSet_UI.Controls.MetroSetLabel lblFri;
+        private MetroSet_UI.Controls.MetroSetLabel lblThurs;
+        private MetroSet_UI.Controls.MetroSetLabel lblWed;
+        private MetroSet_UI.Controls.MetroSetLabel lblTuesday;
+        private MetroSet_UI.Controls.MetroSetLabel lblMonday;
+        private MetroSet_UI.Controls.MetroSetLabel lblSunday;
+        private MetroSet_UI.Controls.MetroSetButton btnPrevious;
+        private MetroSet_UI.Controls.MetroSetButton btnNext;
+        private System.Windows.Forms.FlowLayoutPanel flwDayContainer;
     }
 }

@@ -13,7 +13,7 @@ using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using MetroSet_UI.Forms;
 using System.Globalization;
-
+using System.ComponentModel.Design;
 
 namespace PersonalFinanceApp
 {
@@ -27,11 +27,20 @@ namespace PersonalFinanceApp
         SeriesCollection transCollection;
         SeriesCollection loanCollection;
         SeriesCollection catCollection;
+        DateTime calMonth;
+        int year;
+        int month;
+        //Form fCalendar;
 
         public Dashboard(int ID)
         {
             InitializeComponent();
             this.userID = ID;
+
+            //Form fCalendar = new Calendar(userID); // instantiate and open child form Calendar in the Calendar tab
+            //OpenChildForm(fCalendar);
+            //this.calMonth = Convert.ToDateTime(fCalendar.Tag);
+            //this.fCalendar = fCalendar;
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -39,19 +48,13 @@ namespace PersonalFinanceApp
             repo = new FinanceDB(); // initialize instance of FinanceDB class
             var user = repo.FindUser(userID);
 
-            GetChartT(chtDTrans);
-            GetChartT(chtTTrans);
-            GetChartT(chtCTrans);
-            GetChartT(chtBCategory);
-            GetChartL(chtDLoans);
-            GetChartL(chtLLoans);
-            GetChartC(pieDCategory);
-            GetChartC(pieBCategory);
+            GetAllCharts(DateTime.Now);
 
             AutoScaleMode = AutoScaleMode.None; // pesky, meddling autoscaling disabled
 
-            Form fCalendar = new Calendar(userID); // instantiate and open child form Calendar in the Calendar tab
-            OpenChildForm(fCalendar);
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            DisplayDays(year, month);
 
             AutoValidate = AutoValidate.EnableAllowFocusChange; // allow user to exit fields that aren't validated
             
@@ -277,6 +280,7 @@ namespace PersonalFinanceApp
             #endregion SUB - Clear Functions
 
             #region SUB - Event-triggered Functions
+
             private void swTAisRecurring_SwitchedChanged(object sender)
             {
                 if (swTAisRecurring.Switched)
@@ -427,7 +431,6 @@ namespace PersonalFinanceApp
                         errorProvider1.SetError(txtLEbalance, "");
                         errorProvider1.SetError(txtLEdurationMonths, "");
                         errorProvider1.SetError(txtLEfixedAPR, "");
-                        errorProvider1.SetError(txtLEpayment, "");
 
                         txtLRloanName.Text = uLoan.loanName;
                         txtLRbalance.Text = uLoan.balance.ToString();
@@ -473,9 +476,41 @@ namespace PersonalFinanceApp
                 childForm.Show();
             }
 
-            private void GetChartT(LiveCharts.WinForms.CartesianChart chart)
+            private void DisplayDays(int year, int month)
             {
-                DateTime startDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime startDay = new DateTime(year, month, 1);
+                lblMonth.Text = DateTimeFormatInfo.CurrentInfo.MonthNames[month - 1];
+                lblYear.Text = year.ToString();
+                int numDays = DateTime.DaysInMonth(year, month);
+                int dayOfWeek = Convert.ToInt32(startDay.DayOfWeek.ToString("d")) + 1;
+
+                for (int i = 1; i < dayOfWeek; i++)
+                {
+                    UserControlBlank ucBlank = new UserControlBlank();
+                    flwDayContainer.Controls.Add(ucBlank);
+                }
+
+                for (int i = 1; i <= numDays; i++)
+                {
+                    UserControlDays ucDays = new UserControlDays();
+                    ucDays.Days(i);
+
+                    DateTime date = startDay.AddDays(i - 1);
+                    DateTime yesterday = date.Subtract(TimeSpan.FromDays(1));
+
+                    decimal balance = repo.SumPastTransactions(userID, date);
+                    ucDays.Balance(balance);
+
+                    decimal netChange = balance - repo.SumPastTransactions(userID, yesterday);
+                    ucDays.NetChange(netChange);
+
+                    flwDayContainer.Controls.Add(ucDays);
+                }
+            }
+
+            private void GetChartT(LiveCharts.WinForms.CartesianChart chart, DateTime date)
+            {
+                DateTime startDay = new DateTime(date.Year, date.Month, 1);
                 int numDays = DateTime.DaysInMonth(startDay.Year, startDay.Month);
                 double[] transArray = new double[numDays];
                 string[] labels = new string[numDays];
@@ -483,15 +518,15 @@ namespace PersonalFinanceApp
 
                 for (int i = 0; i < numDays; i++)
                 {
-                    DateTime date = startDay.AddDays(i);
+                    DateTime temp = startDay.AddDays(i);
                 
-                    double balance = (double)repo.SumPastTransactions(userID, date);
+                    double balance = (double)repo.SumPastTransactions(userID, temp);
                     transArray[i] = balance;
                     labels[i] = (i + 1).ToString();    
                 }
 
                 Axis xAxis = new Axis();
-                xAxis.Title = DateTimeFormatInfo.CurrentInfo.MonthNames[DateTime.Now.Month - 1] + " " + DateTime.Now.Year;
+                xAxis.Title = DateTimeFormatInfo.CurrentInfo.MonthNames[date.Month - 1] + " " + date.Year;
                 //AxisSection section = new AxisSection()
                 //{
                 //    Stroke = System.Windows.Media.Brushes.Black,
@@ -517,7 +552,9 @@ namespace PersonalFinanceApp
                 transCollection = new SeriesCollection() { transSeries };
 
                 chart.Series = transCollection;
-                chart.AxisX.Add(xAxis);         
+                chart.AxisX.Clear();
+                chart.AxisX.Add(xAxis); 
+                chart.AxisY.Clear();
                 chart.AxisY.Add(yAxis);
             }
 
@@ -566,36 +603,50 @@ namespace PersonalFinanceApp
                 };
 
                 chart.Series = loanCollection;
+                chart.AxisX.Clear();
                 chart.AxisX.Add(xAxis);
+                chart.AxisY.Clear();
                 chart.AxisY.Add(yAxis);
                 chart.LegendLocation = LegendLocation.Bottom;
 
             }
 
-        private void GetChartC(LiveCharts.WinForms.PieChart chart)
-        {
-            catCollection = new SeriesCollection();
-            DateTime today = DateTime.Now;
-            var catList = repo.MonthCategories(userID, today);
-            Func<ChartPoint, string> pointLabel = chartPoint => String.Format("{0:C} ({1:P1})", chartPoint.Y, chartPoint.Participation);
-            foreach (var cat in catList)
+            private void GetChartC(LiveCharts.WinForms.PieChart chart)
             {
-                if (cat.MonthValue > 0)
+                catCollection = new SeriesCollection();
+                DateTime today = DateTime.Now;
+                var catList = repo.MonthCategories(userID, today);
+                Func<ChartPoint, string> pointLabel = chartPoint => String.Format("{0:C} ({1:P1})", chartPoint.Y, chartPoint.Participation);
+                foreach (var cat in catList)
                 {
-                    PieSeries series = new PieSeries()
+                    if (cat.MonthValue < 0)
                     {
-                        Values = new ChartValues<double> { (double)cat.MonthValue },
-                        Title = cat.categoryName,
-                        DataLabels = true,
-                        LabelPoint = pointLabel
-                    };
-                    catCollection.Add(series);
+                        PieSeries series = new PieSeries()
+                        {
+                            Values = new ChartValues<double> { -(double)cat.MonthValue },
+                            Title = cat.categoryName,
+                            DataLabels = true,
+                            LabelPoint = pointLabel
+                        };
+                        catCollection.Add(series);
+                    }
                 }
+
+                chart.Series = catCollection;
+                chart.LegendLocation= LegendLocation.Bottom;
             }
 
-            chart.Series = catCollection;
-            chart.LegendLocation= LegendLocation.Bottom;
-        }
+            private void GetAllCharts(DateTime calMonth)
+            {
+                GetChartT(chtDTrans, DateTime.Now);
+                GetChartT(chtTTrans, DateTime.Now);
+                GetChartT(chtCTrans, calMonth);
+                GetChartT(chtBCategory, DateTime.Now);
+                GetChartL(chtDLoans);
+                GetChartL(chtLLoans);
+                GetChartC(pieDCategory);
+                GetChartC(pieBCategory);
+            }
 
             #endregion SUB - Component Automation
 
@@ -630,8 +681,7 @@ namespace PersonalFinanceApp
             private bool LAValid()
             {
                 if (errorProvider1.GetError(txtLAbalance) == "" && errorProvider1.GetError(txtLAdurationMonths) == "" &&
-                    errorProvider1.GetError(txtLAfixedAPR) == "" && errorProvider1.GetError(txtLAloanName) == "" &&
-                    errorProvider1.GetError(txtLApayment) == "")
+                    errorProvider1.GetError(txtLAfixedAPR) == "" && errorProvider1.GetError(txtLAloanName) == "")
                     return true;
                 else
                     return false;
@@ -640,8 +690,7 @@ namespace PersonalFinanceApp
             private bool LEValid()
             {
                 if (errorProvider1.GetError(txtLEbalance) == "" && errorProvider1.GetError(txtLEdurationMonths) == "" &&
-                    errorProvider1.GetError(txtLEfixedAPR) == "" && errorProvider1.GetError(txtLEloanName) == "" &&
-                    errorProvider1.GetError(txtLEpayment) == "")
+                    errorProvider1.GetError(txtLEfixedAPR) == "" && errorProvider1.GetError(txtLEloanName) == "")
                     return true;
                 else
                     return false;
@@ -665,7 +714,7 @@ namespace PersonalFinanceApp
 
             #endregion SUB - Bool Checks
 
-            #region SUB - Input Validation
+        #region SUB - Input Validation
 
             // Validation for Transaction Addition ---------------------------------------------------------------
             private void txtTAtransName_Validating(object sender, CancelEventArgs e)
@@ -921,6 +970,16 @@ namespace PersonalFinanceApp
             private void txtLAbalance_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLAbalance, "");
+                if (LAValid())
+                {
+                    double p = Double.Parse(txtLAbalance.Text);
+                    double r = Double.Parse(txtLAfixedAPR.Text) / 12 / 100;
+                    int n = Int32.Parse(txtLAdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+                    payAmt = Math.Round(payAmt, 2);
+
+                    txtLApayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLAdurationMonths_Validating(object sender, CancelEventArgs e)
@@ -941,6 +1000,16 @@ namespace PersonalFinanceApp
             private void txtLAdurationMonths_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLAdurationMonths, "");
+                if (LAValid())
+                {
+                    double p = Double.Parse(txtLAbalance.Text);
+                    double r = Double.Parse(txtLAfixedAPR.Text) / 12 / 100;
+                    int n = Int32.Parse(txtLAdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+                    payAmt = Math.Round(payAmt, 2);
+
+                    txtLApayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLAfixedAPR_Validating(object sender, CancelEventArgs e)
@@ -961,6 +1030,16 @@ namespace PersonalFinanceApp
             private void txtLAfixedAPR_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLAfixedAPR, "");
+                if (LAValid())
+                {
+                    double p = Double.Parse(txtLAbalance.Text);
+                    double r = Double.Parse(txtLAfixedAPR.Text)/12/100;
+                    int n = Int32.Parse(txtLAdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n)-1));
+                    payAmt = Math.Round(payAmt,2);
+
+                    txtLApayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLApayment_Validating(object sender, CancelEventArgs e)
@@ -1021,6 +1100,16 @@ namespace PersonalFinanceApp
             private void txtLEbalance_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLEbalance, "");
+                if (LEValid())
+                {
+                    double p = Double.Parse(txtLEbalance.Text);
+                    double r = Double.Parse(txtLEfixedAPR.Text) / 12 / 100;
+                    int n = Int32.Parse(txtLEdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+                    payAmt = Math.Round(payAmt, 2);
+
+                    txtLEpayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLEdurationMonths_Validating(object sender, CancelEventArgs e)
@@ -1041,6 +1130,16 @@ namespace PersonalFinanceApp
             private void txtLEdurationMonths_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLEdurationMonths, "");
+                if (LEValid())
+                {
+                    double p = Double.Parse(txtLEbalance.Text);
+                    double r = Double.Parse(txtLEfixedAPR.Text) / 12 / 100;
+                    int n = Int32.Parse(txtLEdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+                    payAmt = Math.Round(payAmt, 2);
+
+                    txtLEpayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLEfixedAPR_Validating(object sender, CancelEventArgs e)
@@ -1061,6 +1160,16 @@ namespace PersonalFinanceApp
             private void txtLEfixedAPR_Validated(object sender, EventArgs e)
             {
                 errorProvider1.SetError(txtLEfixedAPR, "");
+                if (LEValid())
+                {
+                    double p = Double.Parse(txtLEbalance.Text);
+                    double r = Double.Parse(txtLEfixedAPR.Text) / 12 / 100;
+                    int n = Int32.Parse(txtLEdurationMonths.Text);
+                    decimal payAmt = (decimal)((p * r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+                    payAmt = Math.Round(payAmt, 2);
+
+                    txtLEpayment.Text = payAmt.ToString();
+                }
             }
 
             private void txtLEpayment_Validating(object sender, CancelEventArgs e)
@@ -1146,23 +1255,19 @@ namespace PersonalFinanceApp
                 if (!swTAisRecurring.Switched)
                 {
                     repo.AddTransaction(newTrans);
-                    RefreshDataT();
-                    RefreshDataL();
-                    RefreshBalance();
-                    ClearT();
                 }
                 else if (swTAisRecurring.Switched)
                 {
                     newTrans.recurIntervalDays = Int32.Parse(txtTArecurIntervalDays.Text);
                     repo.AddTransaction(newTrans);
                     repo.AddRecur(newTrans);
-                    RefreshDataT();
-                    RefreshDataL();
-                    RefreshBalance();
-                    ClearT();
                 }
                 if (newTrans.loanID != null)
                     RefreshBalance();
+                RefreshDataT();
+                RefreshDataL();
+                ClearT();
+                GetAllCharts(calMonth);
             }
         }
 
@@ -1195,9 +1300,10 @@ namespace PersonalFinanceApp
                     else
                         uTrans.loanID = null;
                     repo.UpdateTransaction(id, uTrans);
-                    RefreshDataT();
                     if (uTrans.loanID != null)
                         RefreshBalance();
+                    RefreshDataT();
+                    GetAllCharts(calMonth);
                 }
                 else
                     MessageBox.Show("Please select a transaction to edit from one of the tabs on the right.");
@@ -1217,7 +1323,10 @@ namespace PersonalFinanceApp
             else
                 repo.DeleteTransaction(dTrans);
             MessageBox.Show($"Transaction '{dTrans.transName}' has been deleted.");
+            RefreshBalance();
             RefreshDataT();
+            RefreshDataL();
+            GetAllCharts(calMonth);
         }
 
         private void btnLAdd_Click(object sender, EventArgs e)
@@ -1230,14 +1339,15 @@ namespace PersonalFinanceApp
                 newLoan.balance = Decimal.Parse(txtLAbalance.Text);
                 newLoan.durationMonths = Int32.Parse(txtLAdurationMonths.Text);
                 newLoan.fixedAPR = Decimal.Parse(txtLAfixedAPR.Text);
-                newLoan.payment = Int32.Parse(txtLApayment.Text);
+                newLoan.payment = Decimal.Parse(txtLApayment.Text);
                 newLoan.userID = userID;
                 repo.AddLoan(newLoan);
+                RefreshBalance();
                 RefreshDataT();
                 RefreshDataL();
                 ClearL();
                 RefreshCMBL();
-                RefreshBalance();
+                GetAllCharts(calMonth);
             }
         }
 
@@ -1256,10 +1366,11 @@ namespace PersonalFinanceApp
                     uLoan.fixedAPR = Decimal.Parse(txtLEfixedAPR.Text);
                     uLoan.payment = Decimal.Parse(txtLEpayment.Text);
                     repo.UpdateLoan(id, uLoan);
+                    RefreshBalance();
                     RefreshDataL();
                     RefreshDataT();
                     RefreshCMBL();
-                    RefreshBalance();
+                    GetAllCharts(calMonth);
                 }
                 else
                     MessageBox.Show("Please select a loan to edit from the panel on the right.");
@@ -1274,9 +1385,11 @@ namespace PersonalFinanceApp
                 var dLoan = repo.FindLoan(id);
                 repo.DeleteLoan(dLoan);
                 MessageBox.Show($"Loan '{dLoan.loanName}' has been deleted.");
+                RefreshBalance();
                 RefreshDataL();
                 RefreshDataT();
                 RefreshCMBL();
+                GetAllCharts(calMonth);
             }
             else
                 MessageBox.Show("There are no loans to remove.");
@@ -1293,6 +1406,7 @@ namespace PersonalFinanceApp
                 RefreshDataC();
                 txtBAcategoryName.Text = null;
                 RefreshCMBC();
+                GetAllCharts(calMonth);
             }
         }
 
@@ -1308,6 +1422,7 @@ namespace PersonalFinanceApp
                 RefreshDataC();
                 RefreshDataT();
                 RefreshCMBC();
+                GetAllCharts(calMonth);
             }
         }
 
@@ -1320,6 +1435,7 @@ namespace PersonalFinanceApp
             RefreshDataC();
             RefreshDataT();
             RefreshCMBC();
+            GetAllCharts(calMonth);
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1334,6 +1450,34 @@ namespace PersonalFinanceApp
 
             LogInPage logInPage = new LogInPage();
             logInPage.Show();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            flwDayContainer.Controls.Clear();
+            month++;
+            if (month == 13)
+            {
+                month = 1;
+                year++;
+            }
+            DisplayDays(year, month);
+            this.calMonth = new DateTime(year, month, 1);
+            GetChartT(chtCTrans, calMonth);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            flwDayContainer.Controls.Clear();
+            month--;
+            if (month == 0)
+            {
+                month = 12;
+                year--;
+            }
+            DisplayDays(year, month);
+            this.calMonth = new DateTime(year, month, 1);
+            GetChartT(chtCTrans, calMonth);
         }
 
         #endregion Button Handling

@@ -140,3 +140,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>", Scope = "member", Target = "~M:PersonalFinanceApp.Dashboard.GetChartT(LiveCharts.WinForms.CartesianChart)")]
 [assembly: SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>", Scope = "member", Target = "~M:PersonalFinanceApp.Dashboard.GetChartL(LiveCharts.WinForms.CartesianChart)")]
 [assembly: SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>", Scope = "member", Target = "~M:PersonalFinanceApp.Dashboard.GetChartT(LiveCharts.WinForms.CartesianChart)")]
+[assembly: SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>", Scope = "member", Target = "~M:PersonalFinanceApp.Dashboard.GetChartC(LiveCharts.WinForms.PieChart)")]

@@ -326,9 +326,10 @@ namespace FinanceDll
         public ICollection<Category> MonthCategories(int id, DateTime date)
         {
             var mTrans = MonthTransactions(id, date);
-            foreach (var trans in mTrans)
+            foreach (var cat in entities.Categories)
             {
-                foreach (var cat in entities.Categories)
+                cat.MonthValue = 0;
+                foreach (var trans in mTrans)
                 {
                     if (cat.categoryID == trans.categoryID)
                         cat.MonthValue += trans.value;

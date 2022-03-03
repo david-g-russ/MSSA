@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using FinanceDll;
+using System.ComponentModel.Design;
 
 namespace PersonalFinanceApp
 {
@@ -18,10 +19,18 @@ namespace PersonalFinanceApp
         int year;
         FinanceDB repo;
         int userID;
+
         public Calendar(int id)
         {
             InitializeComponent();
             this.userID = id;
+        }
+
+        public event EventHandler MonthChanged;
+
+        public void OnMonthChanged()
+        {
+            MonthChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void Calendar_Load(object sender, EventArgs e)
@@ -30,6 +39,7 @@ namespace PersonalFinanceApp
             year = DateTime.Now.Year;
             month = DateTime.Now.Month;
             DisplayDays(year, month);
+            this.Tag = DateTime.Now;
         }
 
         private void DisplayDays(int year, int month)
@@ -75,6 +85,9 @@ namespace PersonalFinanceApp
                 year++;
             }
             DisplayDays(year, month);
+            DateTime calMonth = new DateTime(year, month, 1);
+            ComponentChangedEventArgs args = new ComponentChangedEventArgs(this, null, null, calMonth);
+            MonthChanged?.Invoke(this, args);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -87,6 +100,10 @@ namespace PersonalFinanceApp
                 year--;
             }
             DisplayDays(year, month);
+            DateTime calMonth = new DateTime(year, month, 1);
+            this.Tag = calMonth;
+            ComponentChangedEventArgs args = new ComponentChangedEventArgs(this, null, null, calMonth);
+            MonthChanged?.Invoke(this, args);
         }
     }
 }
