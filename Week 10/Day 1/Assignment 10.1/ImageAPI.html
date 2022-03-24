@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Image API</title>
+    <script>
+        function onLoadBinary() {
+            const theImageElem = document.getElementById("imgFile");
+            if (theImageElem.files.length != 0 && theImageElem.files[0].type.match(/image.*/)) {
+                const reader = new FileReader();
+                reader.readAsDataURL(theImageElem.files[0]);
+                reader.onload = e => {
+                    const img = document.getElementById("theImg");
+                    img.src = e.target.result;
+                };
+                reader.onerror = e => alert("Image could not be loaded.");
+            }
+            else { alert("Please select an image.") };
+        }
+    </script>
+</head>
+<body>
+    <input type="file" id="imgFile" onchange="onLoadBinary()" />
+    <img id="theImg" width="500" height="500" />
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿@inject CustomMiddleware.Services.IRandomService randomservice
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>In index view!</h1>
+    <div>
+        Random number value from viewbag: @ViewBag.number
+    </div>
+    <div>
+        Value from injected service is: @randomservice.GetNumber()
+    </div>
+</body>
+</html>

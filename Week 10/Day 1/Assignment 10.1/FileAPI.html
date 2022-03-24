@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FileAPI</title>
+    <script>
+        function onLoadTextFile() {
+            const theFileElem = document.getElementById("txtFile");
+            if (theFileElem.files.length != 0 && theFileElem.files[0].type.match(/text.*/)){
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const txtarea = document.getElementById("fileContents");
+                    txtarea.value = e.target.result;
+                };
+                reader.onerror = e => alert("Cannot load file.");
+                reader.readAsText(theFileElem.files[0], "ISO-8859-1");
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- File browsing control -->
+    <input type="file" id="txtFile" onchange="onLoadTextFile()" />
+    <!-- File content display -->
+    <textarea id="fileContents" rows="50" cols="50" style="overflow-y:scroll">
+
+    </textarea>
+</body>
+</html>

@@ -277,7 +277,7 @@
             this.tbcMain.ItemSize = new System.Drawing.Size(100, 38);
             this.tbcMain.Location = new System.Drawing.Point(12, 186);
             this.tbcMain.Name = "tbcMain";
-            this.tbcMain.SelectedIndex = 3;
+            this.tbcMain.SelectedIndex = 2;
             this.tbcMain.SelectedTextColor = System.Drawing.Color.White;
             this.tbcMain.Size = new System.Drawing.Size(2536, 1242);
             this.tbcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;

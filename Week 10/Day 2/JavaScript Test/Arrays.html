@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Arrays</title>
+    <script>
+        let fruits = ["Apple", "Kiwi", "Orange"];
+        let seasons = new Array(4);
+        seasons[0] = "Spring";
+
+        document.write("Length of array is " + fruits.length + "<br/>");
+
+        for (var i = 0; i < fruits.length; i++)
+        {
+            document.writeln(fruits[i] + "<br/>");
+        }
+
+        fruits.forEach(fruitFunc)
+
+        function fruitFunc(fruit)
+        {
+            document.writeln(fruit + "<br/>");
+        }
+
+        fruits.unshift("Strawberry"); // adds element at the beginning
+        fruits.push("Blueberry"); // adds element to the end
+        document.writeln("After adding.." + "<br/>");
+
+        for (var fruit in fruits)
+        {
+            document.writeln(fruit + "<br/>");
+        }
+
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>

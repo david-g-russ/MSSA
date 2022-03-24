@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Assignment_11._4._1</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Static\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\about.html" />
+    <None Include="wwwroot\audio\ILLENIUM - Every Piece Of Me.mp3" />
+    <None Include="wwwroot\docs\David_Russ_Resume.pdf" />
+    <None Include="wwwroot\images\car.jpg" />
+    <None Include="wwwroot\images\DR Logo.png" />
+    <None Include="wwwroot\images\laptop.jpg" />
+    <None Include="wwwroot\images\leetcode.png" />
+    <None Include="wwwroot\images\newleaf.png" />
+    <None Include="wwwroot\images\thumbnail_david2.jpg" />
+    <None Include="wwwroot\images\thumbnail_Headshot_DavidRuss.jpg" />
+    <None Include="wwwroot\scripts\index.js" />
+    <None Include="wwwroot\styles\site.css" />
+    <None Include="wwwroot\videos\Scub3.mp4" />
+    <None Include="wwwroot\videos\Scuba.MP4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

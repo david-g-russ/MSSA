@@ -1,0 +1,28 @@
+﻿body { /* element selector */
+    background-color:aquamarine;
+    margin:0;
+    font-size:1.8rem; /* 18 pixels */
+}
+html{
+    font-size:60%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.imgcontainer{
+    border:dashed;
+    width:300px;
+    height:300px;
+}
+nav{
+    background-color:mediumaquamarine;
+    line-height:6rem;
+    font-size:1.7rem;
+}
+.container{
+    padding:0 1rem;
+    max-width:95rem;
+    margin:auto;
+}
+nav a{
+    color:white;
+    padding:1rem;
+}

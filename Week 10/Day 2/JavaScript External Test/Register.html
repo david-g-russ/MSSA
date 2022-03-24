@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 10.2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="css/Site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header><strong>Assignment 10.2</strong></header>
+
+    <section class="section__form">
+        <form>
+            <fieldset>
+                <legend>Problem 1: Enter numbers to calculate</legend>
+                <ul style="list-style-type:none">
+                    <li>
+                        <input type="number" id="number1" name="Number1" />
+                    </li>
+                    <li>
+                        <input type="number" id="number2" name="Number2" />
+                    </li>
+                    <li>
+                        <button type="button" id="plusBtn" class="listenEvent">Add</button>
+                        <button type="button" id="minusBtn" class="listenEvent">Subtract</button>
+                        <button type="button" id="multiplyBtn" class="listenEvent">Multiply</button>
+                        <button type="button" id="divideBtn" class="listenEvent">Divide</button>
+                    </li>
+                    <li>
+                        <hr />
+                        <label><strong>Result:</strong></label>
+                        <p id="result"></p>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="section__mid">
+        <form>
+            <fieldset>
+                <legend>Problem 2: Hobby List</legend>
+                <ul style="list-style-type:none">
+                    <li>
+                        <label><strong>My Hobbies</strong></label>
+                        <div id="hobbiesList">
+                            <button type="button" id="newHobbyBtn" class="listenEvent">Add Hobby</button><br/>
+                            <input type="text" name="hobby" class="hobbiesInput" />
+                        </div>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="section__form">
+        <form>
+            <fieldset>
+                <legend>Problem 3: Add items to string array</legend>
+                <ul style="list-style-type:none">
+                    <li>
+                        <input type="text" id="textAdd" />
+                    </li>
+                    <li>
+                        <button type="button" id="newTopBtn" class="listenEvent">Add Item To Top of List</button>
+                        <button type="button" id="newBotBtn" class="listenEvent">Add Item To Bottom of List</button>
+                        <hr />
+                    </li>
+                </ul>
+
+                <ul id="strings">
+                    
+                </ul>
+            </fieldset>
+        </form>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', event => {
+            let stringArray = [];
+
+            document.querySelectorAll('.listenEvent').forEach(container => container.addEventListener("click", e => Switcher(e.target.id)))
+
+            const Switcher = (type) => {
+                let num1 = parseInt(Fetch("number1").value);
+                let num2 = parseInt(Fetch("number2").value);
+
+                switch (type) {
+                    case "plusBtn":
+                        Add(num1,num2);
+                        break;
+                    case "minusBtn":
+                        Subtract(num1, num2);
+                        break;
+                    case "multiplyBtn":
+                        Multiply(num1, num2);
+                        break;
+                    case "divideBtn":
+                        Divide(num1, num2);
+                        break;
+                    case "newHobbyBtn":
+                        AddHobbies();
+                        break;
+                    case "newTopBtn":
+                        AddTop();
+                        DisplayStr();
+                        break;
+                    case "newBotBtn":
+                        AddBot();
+                        DisplayStr();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            const Fetch = (name) => document.getElementById(name);
+
+            const AddHobbies = () => {
+                const inputList = document.querySelectorAll('.hobbiesInput');
+                if (inputList.length < 5) {
+                    const hobbiestList = Fetch('hobbiesList');
+                    const newlineelement = CreateNode('br'),
+                        inputElement = CreateNode('input');
+                    inputElement.setAttribute("class", "hobbiesInput");
+                    Append(hobbiestList, newlineelement);
+                    Append(hobbiestList, inputElement);
+                }
+                else {
+                    Fetch('newHobbyBtn').removeEventListener('click', AddHobbies());
+                }
+            }
+
+            const CreateNode = (element) => document.createElement(element);
+        
+            const Append = (parent, el) => parent.appendChild(el);
+        
+            const AddTop = () => stringArray.unshift(Fetch('textAdd').value);
+
+            const AddBot = () => stringArray.push(Fetch('textAdd').value);
+
+            const DisplayStr = () => {
+                Fetch("strings").innerHTML = '';
+
+                for (let i = 0; i < stringArray.length; i++) {
+                    let li = CreateNode('li');
+                    li.innerText = stringArray[i];
+                    Append(strings, li);
+                }
+            }
+
+            const Add = (num1, num2) => Fetch("result").innerHTML = num1 + num2;
+
+            const Subtract = (num1, num2) => Fetch("result").innerHTML = num1 - num2;
+
+            const Multiply = (num1, num2) => Fetch("result").innerHTML = num1 * num2;
+
+            const Divide = (num1, num2) => Fetch("result").innerHTML = num1 / num2;
+
+        });
+    </script>
+</body>
+</html>

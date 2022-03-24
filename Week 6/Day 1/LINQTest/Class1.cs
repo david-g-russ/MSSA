@@ -9,4 +9,5 @@ namespace LINQTest
     internal class Class1
     {
     }
+    
 }

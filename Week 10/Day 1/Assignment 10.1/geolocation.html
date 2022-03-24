@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geolocator</title>
+    <link href="/styles/site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        function showPosition() {
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    let positionInfo = ('Your current location is:<br/>' + 'Latitude: ' + position.coords.latitude + '<br/>Longitude: ' + position.coords.longitude);
+                    document.getElementById('position').innerHTML = positionInfo;
+                });
+            else
+                alert("Geolocation could not be obtained. Try changing your privacy settings to use this function.");
+        }
+    </script>
+</head>
+<body style="background-color: #576d88 ">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <a href="/index.html" class="active">Home</a>
+            <a href="/about.html">About Me</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header style="background-color: #FFFFFF">
+        <div class="logo">
+            <img src="images/DR Logo.png" alt="Logo" height="60" />
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav">
+            <ul class="nav_list">
+                <li class="nav_item"><a href="/about.html#home" class="nav__link">Home</a> </li>
+                <li class="nav_item"><a href="/about.html#skills" class="nav__link">Skills</a></li>
+                <li class="nav_item"><a href="/about.html#about" class="nav__link">About Me</a></li>
+                <li class="nav_item"><a href="/about.html#work" class="nav__link">My Work</a></li>
+                <li class="nav_item"><a href="/about.html#contact" class="nav__link">Contact Me</a></li>
+                <li class="nav_item"><a href="geolocation.html" class="nav__link">Geolocator</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="position" class="geoPos"></div>
+
+    <button type="button" onclick="showPosition()" class="geoBtn">Show Geolocation</button>
+
+    <!-- Footer with Contact Info -->
+    <footer class="footer" id="contact">
+        <a href="mailto:david.g.russ@outlook.com">david.g.russ@outlook.com</a>
+        <ul class="social-list">
+            <li class="social-list__item">
+                <a href="https://github.com/david-g-russ" class="social-list_link" target="_blank">
+                    <i class="fab fa-github-square"></i>
+                </a>
+            </li>
+            <li class="social-list__item">
+                <a href="https://www.linkedin.com/in/david-g-russ/" class="social-list_link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </li>
+        </ul>
+        <p>
+            &#169; 2022 David Russ
+        </p>
+    </footer>
+
+    <script src="scripts/index.js"></script>
+
+</body>
+</html>

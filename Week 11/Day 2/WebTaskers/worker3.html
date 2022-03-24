@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function startWorker() {
+            let sharedworker = new SharedWorker("/js/sharedworker.js");
+            if (window.SharedWorker) {
+                sharedworker.port.start();
+                sharedworker.port.postMessage([2, 2, 2, 2, 2]);
+                sharedworker.port.addEventListener('message', e => {
+                    document.getElementById('result').innerHTML = e.data;
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="startWorker();" type="button">Start web worker</button>
+    <div id="result">
+
+    </div>
+</body>
+</html>

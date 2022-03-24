@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Operators</title>
+    <script type="text/javascript">
+        document.writeln("I am learning JavaScript!" + "<br/>");
+        // single line comment
+        /* multi-line
+         * comment */
+        alert("This is an alert.");
+    </script>
+</head>
+<body>
+    <script>
+        var x; // undefined, variable declaration in ES5 version, has limitations
+        document.write(x);
+        x = 10; // assignment of value
+        document.write("<p>" + x + "</p>");
+
+        let num1 = 10; // new variable declaration for ES6
+        let num2 = "10";
+        if (num1 == num2)
+        {
+            alert("The numbers are equal");
+        }
+        if (num1 === num2)
+        {
+            alert("The numbers are equal in value and type");
+        }
+        else
+        {
+            alert("They are not equal in both value and type");
+        }
+
+        let y = 50;
+        y += 50;
+
+        // other valid operators, -=, *=, /=
+        // &&, ||, !=, !==, <, <=, >, >=
+
+    </script>
+</body>
+</html>

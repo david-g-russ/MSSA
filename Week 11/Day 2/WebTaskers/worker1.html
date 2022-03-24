@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function callWorker() {
+            if (window.Worker) {
+                // dedicated web worker
+                let worker = new Worker("/js/dedicatedwebworker.js");
+                // associating event handler to onmessage event
+                worker.onmessage = function (e) {
+                    document.getElementById('result').innerHTML = e.data;
+                }
+            }
+            else { alert("Web workers not supported!");}
+        }
+    </script>
+</head>
+<body>
+    <div id="result">
+        <!-- received messages printed here -->
+    </div>
+    <button onclick="callWorker()">Call worker</button>
+</body>
+</html>

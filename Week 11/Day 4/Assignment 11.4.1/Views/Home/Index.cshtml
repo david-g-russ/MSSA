@@ -1,0 +1,22 @@
+﻿@inject Assignment_11._4._1.Services.IData data
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Demonstration of dependency injection.</h1>
+    <div>
+        List of products from ViewBag: (products would be loaded here if they existed) @ViewBag.products
+    </div>
+    <div>
+        List of products from injection: (products would be loaded here if they existed) @data.GetAll()
+    </div>
+</body>
+</html>
