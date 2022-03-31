@@ -1,0 +1,35 @@
+﻿@model Assignment12._1.Models.AllProductsView
+@{
+    ViewData["Title"] = "DisplayAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DisplayAll</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=>model.Products[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Products[0].Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem=>product.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem=>product.Name)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

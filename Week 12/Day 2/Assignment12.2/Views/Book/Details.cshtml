@@ -1,0 +1,42 @@
+﻿@model Assignment12._2.Models.Book;
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+<div class="text-center">
+    <h1>Details</h1>
+
+    <dl class="align-middle">
+        <dt>
+            @Html.DisplayNameFor(model=>model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.ISBN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.ISBN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Genre)
+        </dd>
+        <div style="padding:1rem">
+            @if(Model.ImageName != null)
+            {
+                <img src="~/img/@Model.ImageName" alt="@Model.ImageName" height="300" width="auto" />
+            }
+        </div>
+    </dl>
+</div>

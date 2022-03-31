@@ -1,0 +1,17 @@
+﻿@*strongly typed view*@
+@model MVCTest.Models.Person
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index in other folder</h1>
+<div class="text-center">
+    Server time is: @ViewBag.ServerTime <br/>
+    Data from viewdata: @ViewData["Message"]
+    <br/>
+    Person Id: @Model.Id
+    <br />
+    Person Name: @Model.Name
+</div>
+

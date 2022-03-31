@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<h2>Employee Details</h2>
+<p>
+    Name: @ViewBag.SelectedEmployee
+</p>
+<img src="@Url.Action("GetImage", new {empName= ViewBag.SelectedEmployee})" width="300" />
+@Html.ActionLink("Back to Home", "Index", "Home")

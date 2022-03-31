@@ -1,0 +1,53 @@
+﻿@model MVCTest2.Models.Employee
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<div class ="text-center">
+    <dl class="align-middle">
+        <dt>
+            @Html.DisplayNameFor(model=>model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Dept)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Dept)
+        </dd>
+    </dl>
+    <div style="padding:10px;">
+        @if(Model.ImageName != null)
+        {
+            <img src="~/img/@Model.ImageName" alt="@Model.ImageName" height="300" width="auto"/>
+        }
+    </div>
+</div>

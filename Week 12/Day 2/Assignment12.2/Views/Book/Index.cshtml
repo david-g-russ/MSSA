@@ -1,0 +1,39 @@
+﻿@model Assignment12._2.Models.BookGallery
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Book Gallery</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Author)
+            </th>
+            <th>
+                Find Out More!
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var currentbook in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem=>currentbook.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem=>currentbook.Author)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-isbn="@currentbook.ISBN">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
