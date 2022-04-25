@@ -50,11 +50,12 @@ WEEK 2: Programming in C#
 WEEK 3: SQL Training.
 
 	Topics:
-	-SQL Server Management Studio
-	-Sorting and filtering queries
-	-Joins and subqueries
-	-Built-in functions
-	-Modifying data
+	
+	- SQL Server Management Studio
+	- Sorting and filtering queries
+	- Joins and subqueries
+	- Built-in functions
+	- Modifying data
 
 WEEK 4: Programming in C#
 
@@ -116,8 +117,9 @@ WEEK 6: Programming in C#
 WEEK 7: Programming in C#
 
 	Topics: 
-	-Creating Reusable Types & Assemblies
-	-Encrypting and Decrypting Data
+	
+	- Creating Reusable Types & Assemblies
+	- Encrypting and Decrypting Data
 
 WEEK 8: Project Week
 
@@ -236,10 +238,39 @@ WEEK 13: Developing ASP.NET Core MVC Web Applications
 
 WEEK 14: Microsoft Azure Fundamentals
 
+	Topics:
+	
+	- Core Azure services
+	- Core solutions and management tools
+	- General security and network security features
+	- Identity, governance, privacy, and compliance features
+	- Cost management and service level agreements
+
 WEEK 15: Project Week
 
-WEEK 16: Developing Solutions for Azure
+	Project: Portfolio website (https://davidruss.dev)
+	Functionality:
+		1. User log-in, log-out, registration, password recovery, password update.
+		2. Accessible user interface that adapts to device screen size and type.
+		3. Sections:
+			- Services
+			- About Me
+			- Portfolio
+			- Skills
+			- Testimonials
+			- Journal
+			- Contact form
 
-WEEK 17: Developing Solutions for Azure
+WEEK 16: Developing Solutions for Azure (In Progress)
 
-WEEK 18: Developing Solutions for Azure
+	Topics:
+	
+	- Creating Azure App Service Web Apps
+	- Implement Azure functions
+	- Develop solutions that use Cosmos DB storage
+	- Develop solutions that use blob storage
+	- Implement Infrastructure as a Service (IaaS)
+
+WEEK 17: Developing Solutions for Azure (TBD)
+
+WEEK 18: Developing Solutions for Azure (TBD)
