@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutCategory.cshtml";
+}
+<div class="text-center align-middle" style="background-color:lightgray">
+    <h2>Categories</h2>
+
+    @if(User.Identity.Name == "Admin")
+    {
+        <a asp-action="Create">Create Category</a>
+    }
+
+    @section section1
+    {
+        <footer class="text-center align-middle" style="background-color:lightgray">
+           <img src="~/img/hierarchy-35795.png" class="img-responsive"/>
+           <a asp-controller="Product" asp-action="DisplayAll">Go to Products Page</a>
+        </footer>
+    }
+</div>

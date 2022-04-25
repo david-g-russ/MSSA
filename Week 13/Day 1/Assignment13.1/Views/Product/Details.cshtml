@@ -1,0 +1,53 @@
+﻿@model Assignment12._4.Models.Product
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class ="text-center">
+    <h1>Details</h1>
+
+    <div class="container main-container clearfix">
+        <dl class="col-md-4">
+            <dt>
+                @Html.DisplayNameFor(model=>model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.ProdType)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.ProdType)
+            </dd>
+        </dl>
+        <div class="col-md-8">
+            @if(Model.ImageName != null)
+            {
+                <img src="~/img/@Model.ImageName" alt="@Model.ImageName" height="300" />
+            }
+        </div>
+    </div>
+    <a asp-action="DisplayAll">Return to Products</a>
+</div>

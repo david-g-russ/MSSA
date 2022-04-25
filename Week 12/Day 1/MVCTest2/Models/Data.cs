@@ -79,7 +79,7 @@ namespace MVCTest2.Models
                 return Employees.Find(x => x.Id == id);
         }
 
-        public List<Employee> InitializeData()
+        public IEnumerable<Employee> InitializeData()
         {
             return Employees;
         }

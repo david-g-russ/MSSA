@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MVCTest2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVCTest2
 {
@@ -24,12 +25,17 @@ namespace MVCTest2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IData, Data>(); // Step 6: Add Singleton to services
+            // services.AddSingleton<IData, Data>(); // Step 6: Add Singleton to services
+            services.AddScoped<IData, DBData>();
+            // services.AddDbContext<EmployeeContext>(options => options.UseSqlite("Data Source=Employees.db"));
+            services.AddDbContext<EmployeeContext>(options => options.UseSqlServer("Server=DESKTOP-N3H4L3V;Database=MSSAEmployees;Trusted_Connection=True;MultipleActiveResultSets=True"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, EmployeeContext employeeContext)
         {
+            //employeeContext.Database.EnsureDeleted();
+            employeeContext.Database.EnsureCreated();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

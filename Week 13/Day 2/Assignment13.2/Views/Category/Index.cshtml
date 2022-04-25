@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutCategory.cshtml";
+}
+<div class="text-center align-middle" style="background-color:lightgray">
+    <h2>Index</h2>
+
+    <a asp-action="Create">Create Category</a>
+
+    @section section1
+    {
+        <footer class="text-center align-middle" style="background-color:lightgray">
+           <img src="~/img/hierarchy-35795.png" class="img-responsive"/>
+           <a asp-controller="Product" asp-action="DisplayAll">Go to Products Page</a>
+        </footer>
+    }
+</div>

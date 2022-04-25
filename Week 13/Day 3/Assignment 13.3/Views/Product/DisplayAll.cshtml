@@ -1,0 +1,50 @@
+﻿@model Assignment_13._3.Models.AllProductsView
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center align-middle">
+    <h2>All Products</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model=>model.Products.Last().Id)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model=>model.Products.Last().Id)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelitem=>product.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem=>product.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@product.Id">Details</a>
+                    </td>
+                    @if (User.Identity.Name == "Admin")
+                    {
+                        <td>
+                            <a asp-action="Update" asp-route-id="@product.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (User.Identity.Name == "Admin")
+    {
+        <a asp-action="Create">Create Product</a>
+    }
+</div>

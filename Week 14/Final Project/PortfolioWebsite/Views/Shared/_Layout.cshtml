@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Website title, keywords -->
+    <title>David Russ &mdash; Developer</title>
+    <meta name="keywords" content="html, css, javascript, jquery, david, russ, developer, c#, mvc">
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="~/css/vendor/icomoon/style.css">
+    <link rel="stylesheet" href="~/css/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="~/css/vendor/aos.css">
+    <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/vendor/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body data-spy="scroll" data-target=".site-nav-target" data-offset="200">
+    <nav class="unslate_co--site-mobile-menu">
+        <div class="close-wrap d-flex">
+        <a href="#" class="d-flex ml-auto js-menu-toggle">
+            <span class="close-label">Close</span>
+            <div class="close-times">
+            <span class="bar1"></span>
+            <span class="bar2"></span>
+            </div>
+        </a>
+        </div>
+        <div class="site-mobile-inner"></div>
+    </nav>
+
+
+    <div class="unslate_co--site-wrap">
+
+        <div class="unslate_co--site-inner">
+
+            <div class="lines-wrap">
+                <div class="lines-inner">
+                    <div class="lines"></div>
+                 </div>
+            </div>
+            <!-- END lines -->
+      
+            <nav class="unslate_co--site-nav site-nav-target">
+
+                <div class="container">
+        
+                  <div class="row align-items-center justify-content-between text-left">
+                    <div class="col-md-5 text-right">
+                      <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
+                        <li class="has-children">
+                          <a href="#home-section" class="nav-link">Home</a>
+                          <ul class="dropdown">
+                            <li>
+                              <a href="index.html">Hero Image BG</a>
+                            </li>
+                            <li>
+                              <a href="index-video.html">Video BG</a>
+                            </li>
+                            <li>
+                              <a href="index-hero-slider.html">Hero Slider</a>
+                            </li>
+                            <li>
+                              <a href="index-sidebar-menu.html">Sidebar Menu</a>
+                            </li>
+                            <li>
+                              <a href="index-right-menu.html">Right Menu</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a href="#services-section" class="nav-link">Services</a></li>
+                        <li><a href="#about-section" class="nav-link">About</a></li>
+                        <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
+                      </ul>
+                    </div>
+                    <div class="site-logo pos-absolute">
+                      <a href="index.html" class="unslate_co--site-logo">David Russ<span>.</span></a>
+                    </div>
+                    <div class="col-md-5 text-right text-lg-left">
+                      <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
+                        <li><a href="#skills-section" class="nav-link">Skills</a></li>
+                        <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
+                        <li><a href="#journal-section" class="nav-link">Journal</a></li>
+                        <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                      </ul>
+
+                      <ul class="site-nav-ul-none-onepage text-right d-inline-block d-lg-none">
+                        <li><a href="#" class="js-menu-toggle">Menu</a></li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+
+            </nav>
+            <!-- END nav -->
+
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+        </div> <!-- END .unslate_co-site-inner -->
+
+        <footer class="unslate_co--footer unslate_co--section">
+            <div class="container">
+                <div class="row justify-content-center">
+                <div class="col-md-7">
+              
+                    <div class="footer-site-logo"><a href="#">David Russ<span>.</span></a></div>
+
+                    <ul class="footer-site-social">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    </ul>
+
+                </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- END .unslate_co-site-wrap -->
+
+    <!-- Loader -->
+    <div id="unslate_co--overlayer"></div>
+    <div class="site-loader-wrap">
+      <div class="site-loader"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="~/js/scripts-dist.js"></script>
+    <script src="~/js/main.js"></script>
+   @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

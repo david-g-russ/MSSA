@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCTest2.Models
 {
@@ -8,6 +9,8 @@ namespace MVCTest2.Models
         // display annotations, data annotations
         [Display(Name = "Employee Id")]
         [Required] // server side
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Display(Name = "Employee Name")]
@@ -25,10 +28,14 @@ namespace MVCTest2.Models
 
         public Dept Dept { get; set; }
 
+        public int DeptId { get; set; }
+
         [Display(Name = "Office email")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "Invalid email format")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        public double Salary { get; set; }
     }
 
     public enum Dept

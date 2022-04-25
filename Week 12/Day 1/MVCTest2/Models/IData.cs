@@ -7,7 +7,7 @@ namespace MVCTest2.Models
     public interface IData
     {
         List<Employee> Employees { get; set; }
-        List<Employee> InitializeData();
+        IEnumerable<Employee> InitializeData();
         Employee GetEmployee(int? id);
         void AddEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
