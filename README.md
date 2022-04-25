@@ -1,7 +1,7 @@
 # MSSA
 Projects completed while attending Microsoft Software &amp; Systems Academy
 
-WEEK 1:
+WEEK 1: Programming in C#
 
 	Assignment 1.1 - 
     	1. Create a simple console application and store your name, age (should take decimal), 
@@ -32,7 +32,7 @@ WEEK 1:
 		StudentLname (string ), StudentGrade ( char ) and public properties for each data member. 
 		Instantiate the class and assign data to properties.call get and set properties.
 
-WEEK 2:
+WEEK 2: Programming in C#
 
 	Assignment 2.1 -
 		1. Write a base class: ‘Shape’ and add properties like id, name and color and method like 
@@ -47,9 +47,16 @@ WEEK 2:
 		2. Design a tip calculator : enter the bill total, tip % and display grand total after adding tip.
 		Use the format specifiers to display currency, % symbol.
 		
-WEEK 3: SQL Training, completed in virtual machine labs.
+WEEK 3: SQL Training.
 
-WEEK 4:
+	Topics:
+	-SQL Server Management Studio
+	-Sorting and filtering queries
+	-Joins and subqueries
+	-Built-in functions
+	-Modifying data
+
+WEEK 4: Programming in C#
 
 	Assignment 4.1 -
 		1. Return even numbers. Write a method that returns a string of even numbers greater than 0 and 
@@ -84,7 +91,7 @@ WEEK 4:
 		a generic list ( you may use Dictionary/Sortedlist) of coffees. Design windows form application
 		to display the list of coffees in grid and perform add/ delete.
 		
-WEEK 5:
+WEEK 5: Programming in C#
 
 	Assignment 5.1 -
 		1. Create employee class and use type safe collections like stack, dictionary etc. to store
@@ -100,17 +107,21 @@ WEEK 5:
 		reference of this class library in windows form application and call methods appropriately. Convert 
 		the windows forms application ( of emp management system) to use class library
 
-WEEK 6:
+WEEK 6: Programming in C#
 
 	Assignment 6.2 -
 		1. Create a table "Cars". Add columns like VIN, Make, Model, Year, Price etc.
 		2. Create a Windows forms app to display records in grid. Perform basic CRUD.
 
-WEEK 7: Creating Reusable Types & Assemblies, Encrypting and Decrypting Data. Assignments completed in virtual labs.
+WEEK 7: Programming in C#
 
-WEEK 8: Project Week.
+	Topics: 
+	-Creating Reusable Types & Assemblies
+	-Encrypting and Decrypting Data
 
-WEEK 9: Project Week.
+WEEK 8: Project Week
+
+WEEK 9: Project Week
 
 	Project: Personal Financial Application
 	Functionality:
@@ -132,7 +143,7 @@ WEEK 9: Project Week.
 		budget category will update all relevant transactions to reflect the new category, removing will 
 		modify all relevant transactions to the Miscellaneous category.
 
-WEEK 10: 
+WEEK 10: Programming in HTML5 with JavaScript and CSS3
 
 	Assignment 10.1 -
 		1. Design an “About Me” page to describe about your educational background, work experience, 
@@ -164,7 +175,7 @@ WEEK 10:
 			-Sign up page to get updates ( user can register to get good deals)
 			-Gallery page to display products ( paintings, frames) with description and price.
 
-WEEK 11:
+WEEK 11: Programming in HTML5 with JavaScript and CSS3
 
 	Assignment 11.1 -
 		1. Continue on art gallery website.
@@ -177,7 +188,7 @@ WEEK 11:
 		add model : Product. Add class : ProductData implementing Idata to create repository. 
 		Use dependency injection.
 		
-WEEK 12:
+WEEK 12: Developing ASP.NET Core MVC Web Applications
 
 	Assignment 12.1 -
 		1. Create an empty template mvc project. Add Product class as a model class with following fields:
@@ -205,7 +216,7 @@ WEEK 12:
 	Assignment 12.4 -
 		1. Modify existing products website application to now work with SQL databases.
 		
-WEEK 13:
+WEEK 13: Developing ASP.NET Core MVC Web Applications
 
 	Assignment 13.1 -
 		1. Create a separate layout for 1 or 2 views to display different layout than other. You may decide 
@@ -223,8 +234,12 @@ WEEK 13:
 		customer to log in.
 		2. Restrict the crud operations to only admins. Allow product display to customers.
 
-WEEK 14: Azure Fundamentals, assignments completed in virtual labs.
+WEEK 14: Microsoft Azure Fundamentals
 
-WEEK 15: Project Week.
+WEEK 15: Project Week
 
-WEEK 16: Developing Solutions for Azure, assignments completed in virtual labs.
+WEEK 16: Developing Solutions for Azure
+
+WEEK 17: Developing Solutions for Azure
+
+WEEK 18: Developing Solutions for Azure
