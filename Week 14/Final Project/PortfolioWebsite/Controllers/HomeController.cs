@@ -11,21 +11,23 @@ namespace PortfolioWebsite.Controllers
 {
     public class HomeController : Controller
     {
+        private IProjectRepository _projectRepository;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProjectRepository projectRepository)
         {
+            _projectRepository = projectRepository;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            AllProjectsView allProjectsView = new()
+            {
+                Projects = _projectRepository.InitializeProjects()
+            };
+            return View(allProjectsView);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

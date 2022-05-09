@@ -1,0 +1,115 @@
+﻿@model PortfolioWebsite.Models.Project
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center heading-portfolio-h3">
+    <h2>Add Project</h2>
+
+    <hr />
+
+    <div class="container clearfix">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" style="height=300"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PortfolioType" class="control-label"></label>
+                    <select asp-for="PortfolioType" asp-items="Html.GetEnumSelectList<PortfolioWebsite.Models.PortfolioType>()" class="form-control" >
+                        <option value="">Please select a portfolio type</option>
+                    </select>
+                    <span asp-validation-for="PortfolioType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageName1" class="control-label"></label>
+                    <input asp-for="ImageName1" class="form-control" />
+                    <span asp-validation-for="ImageName1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageName2" class="control-label"></label>
+                    <input asp-for="ImageName2" class="form-control" />
+                    <span asp-validation-for="ImageName2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageName3" class="control-label"></label>
+                    <input asp-for="ImageName3" class="form-control" />
+                    <span asp-validation-for="ImageName3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VideoUrl" class="control-label"></label>
+                    <input asp-for="VideoUrl" class="form-control" />
+                    <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProjectDate" class="control-label"></label>
+                    <input asp-for="ProjectDate" class="form-control" />
+                    <span asp-validation-for="ProjectDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserInterface" class="control-label"></label>
+                    <input asp-for="UserInterface" class="form-control" />
+                    <span asp-validation-for="UserInterface" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GitHubUrl" class="control-label"></label>
+                    <input asp-for="GitHubUrl" class="form-control" />
+                    <span asp-validation-for="GitHubUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasCs" /> @Html.DisplayNameFor(model => model.HasCs)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasJs" /> @Html.DisplayNameFor(model => model.HasJs)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasCss" /> @Html.DisplayNameFor(model => model.HasCss)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasHtml" /> @Html.DisplayNameFor(model => model.HasHtml)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasAsp" /> @Html.DisplayNameFor(model => model.HasAsp)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HasSql" /> @Html.DisplayNameFor(model => model.HasSql)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to Portfolio</a>
+    </div>
+
+</div>

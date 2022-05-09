@@ -1,0 +1,47 @@
+﻿@model PortfolioWebsite.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center heading-portfolio-h3">
+    <h2>Log In</h2>
+
+    <hr />
+
+    <div class="container clearfix">
+            <div class="col-md-8 floatz">
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 floatz">
+                <img src="~/images/LogIn.png" class="img-responsive"/>
+            </div>
+    </div>
+
+    <div>
+        <a asp-action="Register">Register a new account</a>
+    </div>
+
+</div>

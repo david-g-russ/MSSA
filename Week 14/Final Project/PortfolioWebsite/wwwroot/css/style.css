@@ -57,6 +57,20 @@ a, a:hover {
   text-decoration: none !important;
 }
 
+.wrapz {
+    margin: 5px;
+}
+
+.floatz {
+    float:left;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 .unslate_co--site-inner {
   margin-bottom: 400px;
   position: relative;
@@ -1610,6 +1624,28 @@ figure.dotted-bg:before {
 .contact-info-v1 .contact-info-val {
   font-size: 20px;
   color: #fff;
+}
+
+.heading-portfolio-h3 {
+    padding: 6rem;
+    color: #D63447;
+}
+
+.heading-portfolio-h3 dd {
+    color: #fff;
+}
+
+.heading-portfolio-h1 {
+    padding: 6rem;
+    color: #D63447;
+}
+
+.heading-portfolio-h1 th {
+    color: #fff;
+}
+
+.heading-portfolio-h1  tr{
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .portfolio-single-inner .heading-portfolio-single-h2 {

@@ -270,7 +270,7 @@
             this.tbcMain.Controls.Add(this.tbLoans);
             this.tbcMain.Controls.Add(this.tbCalendar);
             this.tbcMain.Controls.Add(this.tbBudget);
-            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tbcMain.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbcMain.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tbcMain.ImageList = this.imageList1;
             this.tbcMain.IsDerivedStyle = true;

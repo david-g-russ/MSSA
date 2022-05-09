@@ -37,11 +37,11 @@
 
         <div class="unslate_co--site-inner">
 
-            <div class="lines-wrap">
+            @*<div class="lines-wrap">
                 <div class="lines-inner">
                     <div class="lines"></div>
                  </div>
-            </div>
+            </div>*@
             <!-- END lines -->
       
             <nav class="unslate_co--site-nav site-nav-target">
@@ -52,8 +52,8 @@
                     <div class="col-md-5 text-right">
                       <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
                         <li class="has-children">
-                          <a href="#home-section" class="nav-link">Home</a>
-                          <ul class="dropdown">
+                          <a href="@Url.Action("Index","Home")" class="nav-link">Home</a>
+                          @*<ul class="dropdown">
                             <li>
                               <a href="index.html">Hero Image BG</a>
                             </li>
@@ -69,22 +69,29 @@
                             <li>
                               <a href="index-right-menu.html">Right Menu</a>
                             </li>
-                          </ul>
+                          </ul>*@
                         </li>
-                        <li><a href="#services-section" class="nav-link">Services</a></li>
-                        <li><a href="#about-section" class="nav-link">About</a></li>
-                        <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
+                        <li><a href="@Url.Action("Index","Home")#services-section" class="nav-link">Services</a></li>
+                        <li><a href="@Url.Action("Index","Home")#about-section" class="nav-link">About</a></li>
+                        <li><a href="@Url.Action("Index","Project")" class="nav-link">Portfolio</a></li>
                       </ul>
                     </div>
                     <div class="site-logo pos-absolute">
-                      <a href="index.html" class="unslate_co--site-logo">David Russ<span>.</span></a>
+                      <a href="@Url.Action("Index","Home")" class="unslate_co--site-logo">David Russ<span>.</span></a>
                     </div>
                     <div class="col-md-5 text-right text-lg-left">
                       <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
-                        <li><a href="#skills-section" class="nav-link">Skills</a></li>
-                        <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
-                        <li><a href="#journal-section" class="nav-link">Journal</a></li>
-                        <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                        <li><a href="@Url.Action("Index","Home")#skills-section" class="nav-link">Skills</a></li>
+                        <li><a href="@Url.Action("Index","Home")#testimonial-section" class="nav-link">Testimonial</a></li>
+                        <li><a href="@Url.Action("Index","Home")#contact-section" class="nav-link">Contact</a></li>
+                        
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                          <li><a asp-controller="Account" asp-action="Logout">Log-out</a></li>         
+                        }
+                        else
+                        {
+                          <li><a asp-controller="Account" asp-action="Login">Log-in</a></li>                           }
                       </ul>
 
                       <ul class="site-nav-ul-none-onepage text-right d-inline-block d-lg-none">
@@ -111,11 +118,11 @@
                 <div class="row justify-content-center">
                 <div class="col-md-7">
               
-                    <div class="footer-site-logo"><a href="#">David Russ<span>.</span></a></div>
+                    <div class="footer-site-logo"><a href="@Url.Action("Index","Home")">David Russ<span>.</span></a></div>
 
                     <ul class="footer-site-social">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="https://github.com/david-g-russ">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/david-g-russ/">LinkedIn</a></li>
                     </ul>
 
                 </div>

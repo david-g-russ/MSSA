@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PortfolioWebsite.Data;
+using PortfolioWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,19 +28,46 @@ namespace PortfolioWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddControllersWithViews();
+            services.AddScoped<IProjectRepository, DBRepository>();
+            services.AddDbContext<ProjectContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+            }).AddEntityFrameworkStores<UserContext>();
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("UserConnection")));
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+        }
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+        public async void CreateRoles(RoleManager<IdentityRole> roleManager)
+        {
+            string[] rolenames = { "Admin", "Guest" };
+            foreach (var rolename in rolenames)
+            {
+                bool roleExists = await roleManager.RoleExistsAsync(rolename);
+                if (!roleExists)
+                {
+                    IdentityRole role = new();
+                    role.Name = rolename;
+                    await roleManager.CreateAsync(role);
+                }
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ProjectContext projectContext, UserContext userContext, RoleManager<IdentityRole> roleManager)
         {
+            projectContext.Database.EnsureCreated();
+            userContext.Database.EnsureCreated();
+            CreateRoles(roleManager);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,7 +92,7 @@ namespace PortfolioWebsite
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
             });
         }
     }

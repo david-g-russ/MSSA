@@ -1,0 +1,53 @@
+﻿@model PortfolioWebsite.Models.AllProjectsView
+@{
+    ViewData["Title"] = "Portfolio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class = "text-center align-middle heading-portfolio-h1">
+    <h2>Portfolio</h2>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th class = "text-center">
+                    @Html.DisplayNameFor(model=>model.Projects.Last().Id)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model=>model.Projects.Last().Name)
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var project in Model.Projects)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelitem=>project.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem=>project.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@project.Id">Details</a>
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@project.Id">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@project.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create">Add Project</a>
+</div>

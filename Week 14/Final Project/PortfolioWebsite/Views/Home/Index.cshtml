@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PortfolioWebsite.Models.AllProjectsView
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,7 +8,7 @@
           <div class="row align-items-center">
               
             <div class="col-md-7 mx-auto text-center">
-              <h1 class="heading gsap-reveal-hero">David Russ<span>.</span></h1>
+              <h1 class="heading gsap-reveal-hero ">David Russ<span>.</span></h1>
               <h2 class="subheading gsap-reveal-hero">Software Engineer | Aerospace Engineer | Marine Officer Veteran </h2>
             </div>
 
@@ -40,7 +41,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
                 <div class="wrap-icon mb-3">
-                  <img src="images/svg/001-options.svg" alt="Image" width="45">
+                  <img src="images/svg/001-options.svg" alt="Options" width="45">
                 </div>
                 <h3>Back- <br> End</h3>
                 <p>With the power of ASP.Net, C#, XAML, and the MVC pattern, I develop stable back-end software that seamlessly and securely connects to both databases and the front-end for a unified user experience. </p>
@@ -60,7 +61,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
                 <div class="wrap-icon mb-3">
-                  <img src="images/svg/003-contact-book.svg" alt="Image" class="img-fluid" width="45">
+                  <img src="images/svg/003-contact-book.svg" alt="Contact" class="img-fluid" width="45">
                 </div>
                 <h3>User <br> Experience</h3>
                 <p>Simple, elegant, and user-friendly design that takes the customer into consideration is at the forefront of every application I create. </p>
@@ -71,7 +72,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="feature-v1" data-aos="fade-up" data-aos-delay="0">
                 <div class="wrap-icon mb-3">
-                  <img src="images/svg/004-percentage.svg" alt="Image" width="45">
+                  <img src="images/svg/004-percentage.svg" alt="Percentage" width="45">
                 </div>
                 <h3>Cloud <br> Development</h3>
                 <p>With a strong understanding of cloud architecture, Azure services, Azure workloads, and cloud application integration, I create secure and privacy-minded cloud-native applications that scale with demand and offer maximum availability. </p>
@@ -81,7 +82,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="feature-v1" data-aos="fade-up" data-aos-delay="100">
                 <div class="wrap-icon mb-3">
-                  <img src="images/svg/006-goal.svg" alt="Image" width="45">
+                  <img src="images/svg/006-goal.svg" alt="Goal" width="45">
                 </div>
                 <h3>Cyber <br> Security</h3>
                 <p>After years of experience in cyber security, I can proactively address organizational information security weaknesses and implement security best practices to maximize protection against common intrusion methods. </p>
@@ -91,7 +92,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="feature-v1" data-aos="fade-up" data-aos-delay="200">
                 <div class="wrap-icon mb-3">
-                  <img src="images/svg/005-line-chart.svg" alt="Image" width="45">
+                  <img src="images/svg/005-line-chart.svg" alt="Line" width="45">
                 </div>
                 <h3>Database <br> Design</h3>
                 <p>Employing Microsoft SQL Server with proper database structure and normalization, efficient stored techniques, and dynamic queries, I implement databases that ensure data security and improve application performance. </p>
@@ -118,7 +119,7 @@
           <div class="row mt-5 justify-content-between">
             <div class="col-lg-7 mb-5 mb-lg-0">
               <figure class="dotted-bg gsap-reveal-img ">
-                <img src="images/aboutme.jpg" alt="Image" class="img-fluid">
+                <img src="images/aboutme.jpg" alt="David" class="img-fluid">
               </figure>
             </div>
             <div class="col-lg-4 pr-lg-5">
@@ -133,7 +134,7 @@
                   I have an active TS/SCI clearance, and have earned certifications in the Microsoft Office suite, SharePoint, Teams, SolidWorks, Systems Tool Kit, MATLAB, C#, T-SQL, JavaScript, CSS3, HTML5, and software development fundamentals. 
                   I hold a Bachelor of Science focused in Aerospace, Aeronautical and Astronautical Engineering from the University of Florida, Cum Laude.
               </p>
-              <p class="gsap-reveal"><a href="#" class="btn btn-outline-pill btn-custom-light">Download my resume</a></p>
+              <p class="gsap-reveal"><a href="~/docs/David_Russ_Resume_Gen.pdf" class="btn btn-outline-pill btn-custom-light">Download my resume</a></p>
             </div>
           </div>
         </div>
@@ -143,8 +144,7 @@
       <!-- BEGIN portfolio -->
       <div class="unslate_co--section" id="portfolio-section">
         <div class="container">
-          
-          
+                    
           <div class="relative"><div class="loader-portfolio-wrap"><div class="loader-portfolio"></div></div> </div>
           <div id="portfolio-single-holder"></div>
 
@@ -163,129 +163,77 @@
                   <a href="#" data-filter=".css">CSS3</a>
                   <a href="#" data-filter=".html">HTML5</a>
                   <a href="#" data-filter=".asp">ASP.NET</a>
+                  <a href="#" data-filter=".sql">SQL</a>
                 </div>
               </div> 
             </div>
             
             <div id="posts" class="row gutter-isotope-item">
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-1.html" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="1">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Shoe Rebranding</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="images/work_1_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-              <div class="item branding packaging illustration col-sm-6 col-md-6 col-lg-4 isotope-mb-2 ">
-                <a href="portfolio-single-3.html" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="3">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Reworking</h3>
-                        <p>branding, packaging, illustration</p>
-                      </div>
-                    </div>
-                    <img src="images/work_2_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
+                @foreach(var project in Model.Projects)
+                {
+                    string langfilter = "";
+                    string langs = "";
+                    if (project.HasAsp)
+                    { langfilter+="asp "; langs += "ASP.NET "; }
+                    if (project.HasCs)
+                    { langfilter += "csharp "; langs += "C# "; }
+                    if (project.HasCss)
+                    { langfilter += "css "; langs += "CSS3 "; }
+                    if (project.HasHtml)
+                    { langfilter += "html "; langs += "HTML5 "; }
+                    if (project.HasJs)
+                    { langfilter += "js "; langs += "JavaScript "; }
+                    if (project.HasSql)
+                    { langfilter += "sql "; langs += "SQL "; }
 
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-4.html" class="portfolio-item isotope-item gsap-reveal-img ajax-load-page" data-id="4">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Modern Building</h3>
-                        <p>branding, packaging</p>
-                      </div>
-                    </div>
-                    <img src="images/work_3_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
+                    if (project.PortfolioType == PortfolioType.Full)
+                    {
+                        <div class="item @langfilter col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
+                            <a href="/Project/Single/@project.Id" class="portfolio-item ajax-load-page isotope-item gsap-reveal-img" data-id="@project.Id">
+                                <div class="overlay">
+                                    <span class="wrap-icon icon-link2"></span>
+                                    <div class="portfolio-item-content">
+                                        <h3>@Html.DisplayFor(modelitem=>project.Name)</h3>
+                                        <p>@langs</p>
+                                    </div>
+                                </div>
+                                <img src="~/images/@project.ImageName1" class="lazyload  img-fluid" alt="@project.Name" />
+                            </a>
+                        </div>
+                    }
 
-              <div class="item web packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
+                    if (project.PortfolioType == PortfolioType.Video)
+                    {
+                        <div class="item @langfilter col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
+                            <a href="@project.VideoUrl" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="@project.Name">
+                                <div class="overlay">
+                                  <span class="wrap-icon icon-play_circle_filled"></span>
+                                  <div class="portfolio-item-content">
+                                    <h3>@Html.DisplayFor(modelitem=>project.Name)</h3>
+                                    <p>@langs</p>
+                                  </div>
+                                </div>
+                                <img src="~/images/@project.ImageName1" class="lazyload  img-fluid" alt="@project.Name" />
+                            </a>
+                        </div>
+                    }
 
-                <a href="images/work_4_full.jpg" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Watch">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Watch</h3>
-                        <p>web, packaging</p>
-                      </div>
-                    </div>
-                    <img src="images/work_4_full.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-
-              </div>
-
-              <div class="item illustration packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="images/work_5_md.jpg" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Shoe Rebranding">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Shoe Rebranding</h3>
-                        <p>illustration, packaging</p>
-                      </div>
-                    </div>
-                    <img src="images/work_5_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="portfolio-single-2.html" class="portfolio-item ajax-load-page item-portrait isotope-item gsap-reveal-img" data-id="2">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-link2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Reshape</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="images/work_6_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item branding packaging col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="images/work_7_a_md.jpg" class="portfolio-item item-portrait isotope-item gsap-reveal-img " data-fancybox="gallery" data-caption="Modern Building">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Modern Building</h3>
-                        <p>branding, packaging</p>
-                      </div>
-                    </div>
-                    <img src="images/work_7_a_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web branding col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="https://www.youtube.com/watch?v=mwtbEGNABWU" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Showreel 2019">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-play_circle_filled"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Showreel 2019</h3>
-                        <p>web, branding</p>
-                      </div>
-                    </div>
-                    <img src="images/work_8_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
-              <div class="item web illustration col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
-                <a href="images/work_9_a_md.jpg" class="portfolio-item isotope-item gsap-reveal-img" data-fancybox="gallery" data-caption="Render Packaging">
-                    <div class="overlay">
-                      <span class="wrap-icon icon-photo2"></span>
-                      <div class="portfolio-item-content">
-                        <h3>Render Packaging</h3>
-                        <p>web, illustration</p>
-                      </div>
-                    </div>
-                    <img src="images/work_9_a_md.jpg" class="lazyload  img-fluid" alt="Images" />
-                  </a>
-              </div>
-
+                    if (project.PortfolioType == PortfolioType.Picture)
+                    {
+                        <div class="item @langfilter col-sm-6 col-md-6 col-lg-4 isotope-mb-2">
+                            <a href="~/images/@project.ImageName1" class="portfolio-item item-portrait isotope-item gsap-reveal-img " data-fancybox="gallery" data-caption="@project.Name">
+                                <div class="overlay">
+                                  <span class="wrap-icon icon-photo2"></span>
+                                  <div class="portfolio-item-content">
+                                    <h3>@Html.DisplayFor(modelitem=>project.Name)</h3>
+                                    <p>@langs</p>
+                                  </div>
+                                </div>
+                                <img src="~/images/@project.ImageName1" class="lazyload  img-fluid" alt="@project.Name" />
+                            </a>
+                        </div>
+                    }
+                }
             </div>
             
           </div>
@@ -300,43 +248,43 @@
         <div class="container">
           <div class="owl-carousel logo-slider">
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-azure.png" alt="Image" class="img-fluid">
+              <img src="images/logo-azure.png" alt="Azure" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-html5.png" alt="Image" class="img-fluid">
+              <img src="images/logo-html5.png" alt="HTML5" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-css3.png" alt="Image" class="img-fluid">
+              <img src="images/logo-css3.png" alt="CSS3" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-csharp.png" alt="Image" class="img-fluid">
+              <img src="images/logo-csharp.png" alt="C#" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-bootstrap.png" alt="Image" class="img-fluid">
+              <img src="images/logo-bootstrap.png" alt="BootStrap" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-javascript.png" alt="Image" class="img-fluid">
+              <img src="images/logo-javascript.png" alt="JavaScript" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-matlab.png" alt="Image" class="img-fluid">
+              <img src="images/logo-matlab.png" alt="MATLAB" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-react.png" alt="Image" class="img-fluid">
+              <img src="images/logo-react.png" alt="React" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-sass.png" alt="Image" class="img-fluid">
+              <img src="images/logo-sass.png" alt="SASS" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-solidworks.png" alt="Image" class="img-fluid">
+              <img src="images/logo-solidworks.png" alt="SolidWorks" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-sql.png" alt="Image" class="img-fluid">
+              <img src="images/logo-sql.png" alt="SQL" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-stk.png" alt="Image" class="img-fluid">
+              <img src="images/logo-stk.png" alt="STK" class="img-fluid">
             </div>
             <div class="logo-v1 gsap-reveal">
-              <img src="images/logo-jira.png" alt="Image" class="img-fluid">
+              <img src="images/logo-jira.png" alt="Jira" class="img-fluid">
             </div>
           </div>
         </div>
@@ -418,7 +366,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-rideout.jpg" alt="Image">
+                <img src="images/test-rideout.jpg" alt="Col Rideout">
                 <h3>Col Brian Rideout</h3>
                 <span class="d-block position">Chief of Staff, I MEF </span>
               </div>
@@ -435,7 +383,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-thomas.png" alt="Image">
+                <img src="images/test-thomas.png" alt="LtCol Thomas">
                 <h3>LtCol Thomas</h3>
                 <span class="d-block position">Commanding Officer, MCSB </span>
               </div>
@@ -452,7 +400,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-welpe.png" alt="Image">
+                <img src="images/test-welpe.png" alt="Capt Welpe">
                 <h3>Capt Welpe</h3>
                 <span class="d-block position">Company Commander, Support Company, 9CB </span>
               </div>
@@ -470,7 +418,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-kumatkar.png" alt="Image">
+                <img src="images/test-kumatkar.png" alt="Deepali Kumatkar">
                 <h3>Deepali Kumatkar</h3>
                 <span class="d-block position">Technical Instructor, MSSA </span>
               </div>
@@ -487,7 +435,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-root.jpg" alt="Image">
+                <img src="images/test-root.jpg" alt="Col Root">
                 <h3>Col Root</h3>
                 <span class="d-block position">Commanding Officer, I MIG </span>
               </div>
@@ -505,7 +453,7 @@
                 </blockquote>
               </div>
               <div class="testimonial-author-info">
-                <img src="images/test-krusinger.png" alt="Image">
+                <img src="images/test-krusinger.png" alt="LtCol Krusinger">
                 <h3>LtCol Krusinger</h3>
                 <span class="d-block position">Executive Officer, I MIG </span>
               </div>
@@ -518,7 +466,7 @@
       </div>
       <!-- END testimonial -->
 
-      <!-- BEGIN journal -->
+      @*<!-- BEGIN journal -->
       <div class="unslate_co--section" id="journal-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">
@@ -530,66 +478,66 @@
           <div class="row gutter-v4 align-items-stretch">
             <div class="col-sm-6 col-md-6 col-lg-8 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
 
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
+              <a href="#" class="grid-item blog-item w-100 h-100">
                 <div class="overlay">
                   <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
+                    <h3>My Coding Journey</h3>
+                    <p class="post-meta">By David Russ <span class="small">&bullet;</span> 10 mins read</p>
                   </div>
                 </div>
-                <img src="images/post_1.jpg" class="lazyload" alt="Image" />
+                <img src="images/post_1.jpg" class="lazyload" alt="Beach" />
               </a>
 
 
             </div>
             <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
+              <a href="#" class="grid-item blog-item w-100 h-100">
                 <div class="overlay">
                   <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
+                    <h3>Interior Decorating for Programmers</h3>
                     <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
                   </div>
                 </div>
-                <img src="images/post_2.jpg" class="lazyload" alt="Image" />
+                <img src="images/DR Logo.png" class="lazyload" alt="David Logo" />
               </a>
             </div>
 
 
             <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="0">
 
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
+              <a href="#" class="grid-item blog-item w-100 h-100">
                 <div class="overlay">
                   <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
+                    <h3>Secrets to Coding</h3>
+                    <p class="post-meta">By David Russ <span class="small">&bullet;</span> 25 mins read</p>
                   </div>
                 </div>
-                <img src="images/post_3.jpg" class="lazyload" alt="Image" />
+                <img src="images/NewLeaf1.png" class="lazyload" alt="Personal Finance App" />
               </a>
 
 
             </div>
             <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="100">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
+              <a href="#" class="grid-item blog-item w-100 h-100">
                 <div class="overlay">
                   <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
+                    <h3>Developing in ASP.NET</h3>
+                    <p class="post-meta">By David Russ <span class="small">&bullet;</span> 3 mins read</p>
                   </div>
                 </div>
-                <img src="images/post_4.jpg" class="lazyload" alt="Image" />
+                <img src="images/StudentManagement.png" class="lazyload" alt="Student Management System" />
               </a>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-4 blog-post-entry" data-aos="fade-up" data-aos-delay="200">
-              <a href="blog-single.html" class="grid-item blog-item w-100 h-100">
+              <a href="#" class="grid-item blog-item w-100 h-100">
                 <div class="overlay">
                   <div class="portfolio-item-content">
-                    <h3>A Mounteering Guide For Beginners</h3>
-                    <p class="post-meta">By Joefrey <span class="small">&bullet;</span> 5 mins read</p>
+                    <h3>How To Create an MVC Application</h3>
+                    <p class="post-meta">By David Russ <span class="small">&bullet;</span> 60 mins read</p>
                   </div>
                 </div>
-                <img src="images/post_5.jpg" class="lazyload" alt="Image" />
+                <img src="images/BookDatabase.png" class="lazyload" alt="Book Database" />
               </a>
             </div>
 
@@ -598,7 +546,7 @@
 
         </div>
       </div>
-      <!-- END journal -->
+      <!-- END journal -->*@
 
       <!-- BEGIN contact -->
       <div class="unslate_co--section" id="contact-section">
@@ -612,7 +560,7 @@
           <div class="row justify-content-between">
             
             <div class="col-md-6">
-              <form method="post" class="form-outline-style-v1" id="contactForm">
+              <form method="post" action="~/php/send-email.php" class="form-outline-style-v1" id="contactForm">
                 <div class="form-group row mb-0">
 
                   <div class="col-lg-6 form-group gsap-reveal">

@@ -1,0 +1,132 @@
+﻿@model PortfolioWebsite.Models.Project
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class = "text-center heading-portfolio-h3">
+    <h1>Details</h1>
+
+    <div class="container clearfix">
+        <dl class="col-md-12">
+            <dt>
+                @Html.DisplayNameFor(model=>model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model=>model.PortfolioType)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.PortfolioType)
+            </dd>
+            <dt>
+                Language
+            </dt>
+            <dd>
+                @{
+                    string langs = "";
+
+                    if (Model.HasAsp)
+                    { langs+="ASP.NET";}
+
+                    if (Model.HasCs)
+                    { langs += " C#"; }
+
+                    if (Model.HasCss)
+                    { langs += " CSS3"; }
+
+                    if (Model.HasHtml)
+                    { langs += " HTML5"; }
+
+                    if (Model.HasJs)
+                    { langs += " JavaScript"; }
+
+                    if (Model.HasSql)
+                    { langs += " SQL"; }
+                }
+                @langs
+            </dd>
+            @if(Model.PortfolioType == PortfolioType.Full)
+            {
+                @if (Model.ImageName1 != null)
+                {
+                    <dt>
+                    @Html.DisplayNameFor(model=>model.ImageName1)
+                    </dt>
+                    <dd>
+                    @Html.DisplayFor(model=>model.ImageName1)
+                    </dd>
+                }
+                @if(Model.ImageName2 != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model=>model.ImageName2)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model=>model.ImageName2)
+                    </dd>
+                }
+                @if (Model.ImageName3 != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model=>model.ImageName3)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model=>model.ImageName3)
+                    </dd>
+                }
+                <dt>
+                    @Html.DisplayNameFor(model=>model.Description)
+                </dt>
+                <dd>
+                    @Html.Raw(Model.Description)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model=>model.ProjectDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.ProjectDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model=>model.UserInterface)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.UserInterface)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model=>model.GitHubUrl)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.GitHubUrl)
+                </dd>
+            }
+            @if(Model.PortfolioType == PortfolioType.Video)
+            {
+                <dt>
+                @Html.DisplayNameFor(model=>model.VideoUrl)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.VideoUrl)
+                </dd>
+            }
+            @if(Model.PortfolioType == PortfolioType.Picture)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model=>model.ImageName1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.ImageName1)
+                </dd>
+            }
+        </dl>
+    </div>
+    <a asp-action="Index">Return to Portfolio</a>
+</div>
