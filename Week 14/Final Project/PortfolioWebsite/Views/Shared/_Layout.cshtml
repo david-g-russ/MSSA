@@ -73,7 +73,14 @@
                         </li>
                         <li><a href="@Url.Action("Index","Home")#services-section" class="nav-link">Services</a></li>
                         <li><a href="@Url.Action("Index","Home")#about-section" class="nav-link">About</a></li>
-                        <li><a href="@Url.Action("Index","Project")" class="nav-link">Portfolio</a></li>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index","Project")" class="nav-link">Portfolio</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Index","Home")#portfolio-section">Portfolio</a></li>
+                        }
                       </ul>
                     </div>
                     <div class="site-logo pos-absolute">

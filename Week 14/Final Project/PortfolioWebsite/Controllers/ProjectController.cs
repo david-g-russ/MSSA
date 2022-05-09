@@ -13,6 +13,7 @@ namespace PortfolioWebsite.Controllers
             _tempRepository = tempRepository;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             AllProjectsView allProjectsView = new()
@@ -30,6 +31,7 @@ namespace PortfolioWebsite.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int? id)
         {
             var model = _tempRepository.GetProject(id);
@@ -38,12 +40,14 @@ namespace PortfolioWebsite.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(Project proj)
         {
@@ -55,6 +59,7 @@ namespace PortfolioWebsite.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Update(int? id)
         {
@@ -62,6 +67,7 @@ namespace PortfolioWebsite.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Update(Project proj, int id)
         {
@@ -70,6 +76,7 @@ namespace PortfolioWebsite.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             var model = _tempRepository.GetProject(id);
